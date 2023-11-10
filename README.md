@@ -6,7 +6,7 @@
 - [***U***go Obiako](https://github.com/Ugo-Obiako)
 - [***I***mmanuel Shin](https://github.com/ImmanuelShin)
 - [***C***aleb Hemphill](https://github.com/kaylubh)
-- [***M***egan Breen](https://github.com/megrose8)
+- [***M***eg Breen](https://github.com/megrose8)
 
 ## Description
 
