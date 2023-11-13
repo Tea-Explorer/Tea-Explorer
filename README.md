@@ -12,27 +12,16 @@
 
 ***Work in Progress***
 
-The first page describes "Tea around the World" with a hover button to see different teas from various countries. The second page provides information about the website and includes contact information for purchasing tea.
-What problem or pain point does it solve? a. Keep it high level without going into too much detail. (3-4 sentences is enough): The website addresses the consumer “pain point” of navigating the vast world of teas by providing a concise and informative platform that features a map that shows continents and countries that can be click/hover to see more details of their specialized tea(s). Additionality, the contact information on the second page allows users that are interested in purchasing their preferred teas to a more centralized sources for information
-Minimum Viable Product (MVP) definition.
-What is the minimum required for you to present on your demo day? the website (first focus on the javascript front end development for the navigation of the map), also HTML and CSS…
-
 ## Problem Domain
 
-***TO DO***
-
-The overall problem domain and how the project solves those problems
+The Tea Explorer website addresses the consumer pain point of navigating the vast world of teas by providing a concise and informative platform featuring an interactive map. Users can click or hover over continents and countries to discover details about specialized teas. The inclusion of contact information on the second page streamlines the process for users interested in purchasing their preferred teas, offering a centralized source for information.
 
 - [Problem Domain](/problem-domain.md)
 - [Requirements](/requirements.md)
 
 ## Domain Model
 
-***TO DO***
-
-Draw out the entities for your project and how they are related to each other. Determine the relationships between the functions/methods and entities of your app.
-Include in your domain model the names and data types of your entities and their properties.
-Do some research on domain modeling and create your own diagram that represents your app.
+![Domain Model Diagram](/images/README/domain-model.png)
 
 ## Versioning
 
