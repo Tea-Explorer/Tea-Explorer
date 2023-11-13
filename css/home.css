@@ -1,40 +1,23 @@
-.header {
-  background-color: rgb(79, 229, 79);
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-}
-
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Josefin Sans', sans-Josefin Sans;
+  background-color: #FBEDDB;
   color: #333;
   margin: 0;
   padding: 0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-
 h1 {
-  font-family: 'Arial', sans-serif;
-  color: #be2f0f;
+  font-family: 'Josefin Sans', Josefin Sans;
+  color: #C16632;
   text-align: center;
   padding: 20px 0;
 }
 .location-info {
-  background-color: #e29898;
+  background-color: #FAF9F8;
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
-}
-
-.location-info {
-  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
   padding: 20px;
@@ -48,7 +31,7 @@ h1 {
 
 .copyright {
   font-weight: bold;
-  background-color: rgb(167, 167, 167);
+  background-color: B59275;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,36 +39,9 @@ h1 {
   height: auto;
 }
 
-<style>
-  #form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  #form input[type="text"],
-  #form input[type="number"] {
-    display: inline-block;
-    width: 100px; 
-    margin-right: 10px;
-  }
-</style>
-
-body {
-  background-color: #f3f3f3;
-  color: #333;
-}
-
 body.dark-mode {
   background-color: #333;
   color: #f3f3f3;
-}
-
-h2 {
-  color: #5cb85c;
-}
-
-h3 {
-  color: #333;
 }
 
 p {
