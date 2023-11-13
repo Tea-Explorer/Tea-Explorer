@@ -36,8 +36,7 @@ The vision of the Tea Explorer website is to create a user-friendly platform tha
 # Functional Requirements
 
 ## User Authentication:
-- Users can create accounts and log in.
-- Users can update their profile information.
+- Users can store dates in the local storage.
 
 ## Tea Exploration:
 - Develop an interactive map with clickable/hoverable continents and countries.
@@ -92,4 +91,4 @@ The vision of the Tea Explorer website is to create a user-friendly platform tha
 - Users access the calendar section to view upcoming global tea events.
 - Details and links provide additional information about each event.
 
-This "Software Development" readme outlines the key functionalities and data flow from user interaction to the completion of tasks within the Tea Explorer website.
+This section outlines the key functionalities and data flow from user interaction to the completion of tasks within the Tea Explorer website.
