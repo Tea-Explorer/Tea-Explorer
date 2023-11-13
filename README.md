@@ -23,6 +23,18 @@ What is the minimum required for you to present on your demo day? the website (f
 
 The overall problem domain and how the project solves those problems
 
+- [Problem Domain](/problem-domain.md)
+- [Requirements](/requirements.md)
+
+## Domain Model
+
+***TO DO***
+
+Draw out the entities for your project and how they are related to each other. Determine the relationships between the functions/methods and entities of your app.
+Include in your domain model the names and data types of your entities and their properties.
+Do some research on domain modeling and create your own diagram that represents your app.
+
+
 ## Versioning
 
 ***TO DO***
