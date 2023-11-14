@@ -2,20 +2,21 @@
 
 // Continent codes for color use mainly
 const continents = {
-    "AF": 0,
-    "AN": 1,
-    "AS": 2,
-    "EU": 3,
-    "NA": 4,
-    "OC": 5,
-    "SA": 6
-  }
+  'AF': 0,
+  'AN': 1,
+  'AS': 2,
+  'EU': 3,
+  'NA': 4,
+  'OC': 5,
+  'SA': 6
+};
+
 // Sets root location for map.
 let mapContainer = am5.Root.new('mapContainer');
 let colors = am5.ColorSet.new(mapContainer, {});
 
 mapContainer.setThemes([
-    am5themes_Animated.new(mapContainer)
+  am5themes_Animated.new(mapContainer)
 ]);
 
 // Creates map.
