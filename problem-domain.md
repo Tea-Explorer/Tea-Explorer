@@ -124,4 +124,3 @@ Medium (4-6 hours)
 
 - **Tea Events Calendar:**
   - **Assigned Task:** Meg
-  - **Estimate:** Medium (4-6 hours)
