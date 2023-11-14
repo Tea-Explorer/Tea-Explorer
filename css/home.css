@@ -1,10 +1,14 @@
-
 body {
   font-family: 'Josefin Sans', sans-Josefin Sans;
   background-color: #FBEDDB;
   color: #333;
   margin: 0;
   padding: 0;
+  display:right;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: auto;
 }
 
 h1 {
@@ -24,9 +28,19 @@ h1 {
 }
 
 .link-container {
-  text-align: center;
+  text-align: right;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 22px;
+}
+
+.link-container a {
+  text-decoration: none;
+  color: #333; 
+  margin: 0 10px;
+}
+
+.link-container a:hover {
+  color: #C16632; 
 }
 
 .copyright {
@@ -39,13 +53,9 @@ h1 {
   height: auto;
 }
 
-body.dark-mode {
-  background-color: #333;
-  color: #f3f3f3;
-}
-
 p {
   line-height: 1.6;
+  margin-bottom: 10px;
 }
 
 ul {
@@ -65,17 +75,17 @@ footer {
 }
 
 .location-info {
-  max-width: 600px; /* Adjust the max-width as per your design */
-  margin: 0 auto; /* Center the content */
-  padding: 20px; /* Add some padding for better readability */
+  max-width: 600px;
+  margin: 0 auto; 
+  padding: 20px; 
 }
 
 .location-info h2 {
-  color: #333; /* Adjust the color as needed */
+  color: #333;
 }
 
 .location-info h3 {
-  color: #006600; /* Adjust the color as needed */
+  color: #006600;
 }
 
 .location-info p, .location-info ul {
@@ -83,198 +93,50 @@ footer {
 }
 
 .location-info ul {
-  padding-left: 20px; /* Add indentation to the list items */
+  padding-left: 20px;
 }
 
 .location-info li {
-  list-style-type: disc; /* Use bullets for list items */
+  list-style-type: disc;
 }
 
-.location-info {
-  max-width: 600px; /* Adjust the max-width as per your design */
-  margin: 0 auto; /* Center the content */
-  padding: 20px; /* Add some padding for better readability */
-}
-
-.location-info h2 {
-  color: #333; /* Adjust the color as needed */
-}
-
-.location-info h3 {
-  color: #006600; /* Adjust the color as needed */
-}
-
-.location-info p, .location-info ul {
-  margin-bottom: 10px;
-}
-
-.location-info ul {
-  padding-left: 20px; /* Add indentation to the list items */
-}
-
-.location-info li {
-  list-style-type: disc; /* Use bullets for list items */
-}
-
-.image-container {
-  float: right; /* Float the image to the right */
-  margin-left: 10px; /* Add some margin for spacing */
-}
-
-.button-container {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#toggle-mode {
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-
-
-/* 4:30pm updates CSS for nav, taken from mostly the chocolate-pizza and wirefram paratice exercise */
-body{
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: auto;
-
-}
-
-main{
-  width:60%;
-  margin: 0 auto;
-}
 .one-two-header p{
   font-size: 35px;
   text-align: left;
   font-family: 'Cedarville Cursive' , cursive;
   font-weight: bold; 
 }
-.one-two-leftheader strong{
-  font-family: Arial, Helvetica, sans-serif;
-  color:rgb(37, 27, 20);
-}
-.one-two-header{
-  display:flex;
-  width: 60%;
-  justify-content: space-between;
-}
 
-.one-two-rightheader, .one-two-leftheader{
+.one-two-rightheader,{
   display:flex;
   align-items: center;
-  flex: 1;
+  
 }
-
-.one-two-rightheader{
-  justify-content:flex-end;
-}
-
 .one-two-leftheader{
-  justify-content: flex-start;
-}
-.one-two-leftheader img{
-  padding:10px;
-}
-
-.separator{
-  border:none;
-  border-top: 1px ridge #494949;
-  border-bottom: 1px outset #494949;
-  height: 1px;
-  width: 60%;
-  margin-top:10px;
-  margin-bottom: 20px;
-}
-
-.above-pizza-image {
-  margin: 25px 0 25px 0;
-  text-align: left;
-}
-.h1-text{
-  font-size:35px;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.above-pizza-image img{
-  justify-content: flex-end;
-}
-figure .pizza-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.first-paragraph-container{
   display:flex;
-  flex-direction: column;
-  text-align: left;
-  color:rgb(37, 27, 20);
-  margin: 10px 0 15px 0;
-}
-.first-paragraph-container p{
-  padding: 15px;
-  font-size: 16px;
-  text-indent: 1em;
-  font-family: Arial, sans-serif;
-}
-
-.image-text-overlay {
-  position: relative;
-  width: 100%;
-}
-.image-text-overlay img {
-  width: 100%;
-  height: auto;
-}
-.image-text-overlay .overlay-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-}
-.profile-picture {
-  display: flex;
   align-items: center;
+}
+
+.one-two-leftheader img {
+  padding: 10px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px; 
+}
+
+.one-two-header {
+  display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
 }
 
-.profile-picture figure{
-  flex-shrink: 0;
-}
-
-.profile-picture div {
+.one-two-rightheader {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-section .profile-picture img{
-  display:flex;
-  width:120px;
-  height:auto;
-}
-section .profile-picture p{
-  display:flex;
-  text-align:left;
-}
-.profile-picture a {
-  padding: 10px 30px;
-  border: none;
-  background-color: rgb(172, 90, 61);
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-left: 15px;
-}
-
-footer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #1c20e2;
 }
