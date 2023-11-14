@@ -5,6 +5,9 @@ const options = {
   defaultView: 'month',
   useCreationPopup: true,
   useDetailPopup: true,
+  popupDelete: function(){
+    return 'Hello';
+  },
   month: {
     visibleWeeksCount: 4,
   },
@@ -24,6 +27,7 @@ const options = {
     },
   ],
 };
+
 const calendar = new Calendar(container, options);
 calendar.createEvents([
     {
@@ -32,6 +36,7 @@ calendar.createEvents([
       title: 'Tea Pouring Ceremony',
       start: '2023-11-14T09:00:00',
       end: '2023-11-14T10:00:00',
+      location: 'Kyoto, Japan',
      color: '#3366CC',
      backgroundColor: '#FFD700',
     },
@@ -43,29 +48,48 @@ calendar.createEvents([
     end: '2023-11-22T10:00:00',
    color: '#3366CC',
    backgroundColor: '#FFD700',
-    }
+    },
+    {
+        id: 'event3',
+        calendarId: 'cal1',
+        title: 'New Green Tea Release',
+        start: '2023-11-25T09:00:00',
+        end: '2023-11-25T10:00:00',
+       color: '#5C7474',
+       backgroundColor: '5C7474',
+    },
+    {
+        id: 'event4',
+        calendarId: 'cal1',
+        title: 'Virtual Earl Grey Tea Seminar',
+        start: '2023-11-27T11:00:00',
+        end: '2023-11-27T12:00:00',
+       color: '#3366CC',
+       backgroundColor: '#FFD700',
+        }
 ])
+calendar.setTheme({
+    common: {
+        backgroundColor: '#FAF9F8',
+        border: '2px solid #656d4f',
+                gridSelection:{
+            backgroundColor: 'none',
+            border: 'none',
+        
+        }
+      },
+  });
+  calendar.setOptions({
+    template: {
+      popupDelete() {
+        return 'Visit Website';
+      },
+    popupEdit(){
+        return'Add to Calendar';
+    },
+    },
+  });
 
-    // {
-    //   id: 'event2',
-    //   calendarId: 'cal1',
-    //   title: 'Lunch appointment',
-    //   start: '2022-06-08T12:00:00',
-    //   end: '2022-06-08T13:00:00',
-    // },
-    // {
-    //   id: 'event3',
-    //   calendarId: 'cal1',
-    //   title: 'Vacation',
-    //   start: '2022-06-08',
-    //   end: '2022-06-10',
-    //   isAllday: true,
-    //   category: 'allday',
-    // },
-//   ]);
-// Load initial events
-// const initialEvents = getUpcomingEvents();
-// // calendar.createSchedules(initialEvents);
 // // Handle month change
 // calendar.on('clickDayname', function (event) {
 //   const currentDate = event.date;
