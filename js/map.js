@@ -21,71 +21,71 @@ mapContainer.setThemes([
 
 // Creates map.
 let map = mapContainer.container.children.push(am5map.MapChart.new(mapContainer, {
-    panX: 'rotateX',
-    projection: am5map.geoMercator()
+  panX: 'rotateX',
+  projection: am5map.geoMercator()
 }));
 
 // Says world, but really just contains countries within the world
 let world = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
-    geoJSON: am5geodata_worldLow,
-    exclude: ['AQ']
+  geoJSON: am5geodata_worldLow,
+  exclude: ['AQ']
 }));
 
 // Set options for all polygons in world map.
 // Set tool tip text upon hover to whatever in tooltipText:
 // 
 world.mapPolygons.template.setAll({
-    tooltipText: '{name}',
-    interactive: true,
-    fill: am5.color(0xaaaaaa),
-    templateField: 'polygonSettings'
+  tooltipText: '{name}',
+  interactive: true,
+  fill: am5.color(0xc16632),
+  templateField: 'polygonSettings'
 });
 
 // Upon hover over specific world state, set target to color in color.getIndex(N)
 world.mapPolygons.template.states.create('hover', {
-    fill: colors.getIndex(2)
+  fill: colors.getIndex(2)
 });
 
 // 
 world.mapPolygons.template.events.on('click', (e) => {
-    let dataItem = e.target.dataItem;
-    let data = dataItem.dataContext;
-    let zoomAnimation = world.zoomToDataItem(dataItem);
-    
-    Promise.all([
-        zoomAnimation.waitForStop(),
+  let dataItem = e.target.dataItem;
+  let data = dataItem.dataContext;
+  let zoomAnimation = world.zoomToDataItem(dataItem);
 
-        am5.net.load('https://cdn.amcharts.com/lib/5/geodata/json/' + data.map + '.json', map)
-    ]).then((results) => {
-        let geoData = am5.JSONParser.parse(results[1].response);
-  
-    
-        province.setAll({
-            geoJSON: geoData,
-            fill: data.polygonSettings.fill
-        });
+  Promise.all([
+    zoomAnimation.waitForStop(),
 
-        province.show();
-        world.hide(100);
-        backButtonContainer.show();
+    am5.net.load('https://cdn.amcharts.com/lib/5/geodata/json/' + data.map + '.json', map)
+  ]).then((results) => {
+    let geoData = am5.JSONParser.parse(results[1].response);
+
+
+    province.setAll({
+      geoJSON: geoData,
+      fill: data.polygonSettings.fill
     });
+
+    province.show();
+    world.hide(100);
+    backButtonContainer.show();
+  });
 });
 
 // Says country, but really contains the individual provinces/states/territories within country
 let province = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
-    visible: false
+  visible: false
 }));
 
 // 
 province.mapPolygons.template.setAll({
-    tooltipText: '{name}',
-    interactive: true,
-    fill: am5.color(0xaaaaaa)
+  tooltipText: '{name}',
+  interactive: true,
+  fill: am5.color(0xc16632)
 });
 
 // Upon hover over specific country state, set target to color in color.getIndex(N)
 province.mapPolygons.template.states.create('hover', {
-    fill: colors.getIndex(9)
+  fill: colors.getIndex(9),
 });
 
 // Creates array of all countries.
@@ -93,18 +93,18 @@ province.mapPolygons.template.states.create('hover', {
 // Currently keeps continent color
 let data = [];
 for (let id in am5geodata_data_countries2) {
-    if (am5geodata_data_countries2.hasOwnProperty(id)) {
-        let country = am5geodata_data_countries2[id];
-        if (country.maps.length) {
-            data.push({
-                id: id,
-                map: country.maps[0],
-                polygonSettings: {
-                    fill: colors.getIndex(continents[country.continent_code])
-                }
-            });
+  if (am5geodata_data_countries2.hasOwnProperty(id)) {
+    let country = am5geodata_data_countries2[id];
+    if (country.maps.length) {
+      data.push({
+        id: id,
+        map: country.maps[0],
+        polygonSettings: {
+          fill: am5.color(0xc16632)
         }
+      });
     }
+  }
 }
 
 // Adds data to world.
@@ -113,298 +113,185 @@ world.data.setAll(data);
 // Creates container to hold back button and back button label
 // Initially set to hidden because it is not needed in world view.
 let backButtonContainer = map.children.push(am5.Container.new(mapContainer, {
-    x: am5.p100,
-    centerX: am5.p100,
-    dx: -10,
-    paddingTop: 5,
-    paddingRight: 10,
-    paddingBottom: 5,
-    y: 30,
-    interactiveChildren: false,
-    layout: mapContainer.horizontalLayout,
-    cursorOverStyle: "pointer",
-    background: am5.RoundedRectangle.new(mapContainer, {
-        fill: am5.color(0xffffff),
-        fillOpacity: 0.2
-    }),
-    visible: false
+  x: am5.p100,
+  centerX: am5.p100,
+  dx: -10,
+  paddingTop: 5,
+  paddingRight: 10,
+  paddingBottom: 5,
+  y: 30,
+  interactiveChildren: false,
+  layout: mapContainer.horizontalLayout,
+  cursorOverStyle: "pointer",
+  background: am5.RoundedRectangle.new(mapContainer, {
+    fill: am5.color(0xffffff),
+    fillOpacity: 0.2
+  }),
+  visible: false
 }));
 
 // Label to go along with button
 let backButtonLabel = backButtonContainer.children.push(am5.Label.new(mapContainer, {
-    text: 'Back to world view',
-    centerY: am5.p50
+  text: 'Back to world view',
+  centerY: am5.p50
 }));
 
 // Back button creation and settings
 // Can change size, shape, color, positioning, etc.
 let backButton = backButtonContainer.children.push(am5.Graphics.new(mapContainer, {
-    width: 10,
-    height: 10,
-    centerY: am5.p50,
-    fill: am5.color(0x000000),
-    svgPath: 'M324.442,129.811l-41.321-33.677V42.275c0-6.065-4.935-11-11-11h-26c-6.065,0-11,4.935-11,11v14.737l-55.213-44.999 c-3.994-3.254-9.258-5.047-14.822-5.047c-5.542,0-10.781,1.782-14.753,5.019L5.8,129.81c-6.567,5.351-6.173,10.012-5.354,12.314 c0.817,2.297,3.448,6.151,11.884,6.151h19.791v154.947c0,11.058,8.972,20.053,20,20.053h62.5c10.935,0,19.5-8.809,19.5-20.053 v-63.541c0-5.446,5.005-10.405,10.5-10.405h42c5.238,0,9.5,4.668,9.5,10.405v63.541c0,10.87,9.388,20.053,20.5,20.053h61.5 c11.028,0,20-8.996,20-20.053V148.275h19.791c8.436,0,11.066-3.854,11.884-6.151C330.615,139.822,331.009,135.161,324.442,129.811z'
+  width: 10,
+  height: 10,
+  centerY: am5.p50,
+  fill: am5.color(0x000000),
+  svgPath: 'M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466zM27.436,17.39c0.001,0.002,0.004,0.002,0.005,0.004c-0.022,0.187-0.054,0.37-0.085,0.554c-0.015-0.012-0.034-0.025-0.047-0.036c-0.103-0.09-0.254-0.128-0.318-0.115c-0.157,0.032,0.229,0.305,0.267,0.342c0.009,0.009,0.031,0.03,0.062,0.058c-1.029,5.312-5.709,9.338-11.319,9.338c-4.123,0-7.736-2.18-9.776-5.441c0.123-0.016,0.24-0.016,0.28-0.076c0.051-0.077,0.102-0.241,0.178-0.331c0.077-0.089,0.165-0.229,0.127-0.292c-0.039-0.064,0.101-0.344,0.088-0.419c-0.013-0.076-0.127-0.256,0.064-0.407s0.394-0.382,0.407-0.444c0.012-0.063,0.166-0.331,0.152-0.458c-0.012-0.127-0.152-0.28-0.24-0.318c-0.09-0.037-0.28-0.05-0.356-0.151c-0.077-0.103-0.292-0.203-0.368-0.178c-0.076,0.025-0.204,0.05-0.305-0.015c-0.102-0.062-0.267-0.139-0.33-0.189c-0.065-0.05-0.229-0.088-0.305-0.088c-0.077,0-0.065-0.052-0.178,0.101c-0.114,0.153,0,0.204-0.204,0.177c-0.204-0.023,0.025-0.036,0.141-0.189c0.113-0.152-0.013-0.242-0.141-0.203c-0.126,0.038-0.038,0.115-0.241,0.153c-0.203,0.036-0.203-0.09-0.076-0.115s0.355-0.139,0.355-0.19c0-0.051-0.025-0.191-0.127-0.191s-0.077-0.126-0.229-0.291c-0.092-0.101-0.196-0.164-0.299-0.204c-0.09-0.579-0.15-1.167-0.15-1.771c0-2.844,1.039-5.446,2.751-7.458c0.024-0.02,0.048-0.034,0.069-0.036c0.084-0.009,0.31-0.025,0.51-0.059c0.202-0.034,0.418-0.161,0.489-0.153c0.069,0.008,0.241,0.008,0.186-0.042C8.417,8.2,8.339,8.082,8.223,8.082S8.215,7.896,8.246,7.896c0.03,0,0.186,0.025,0.178,0.11C8.417,8.091,8.471,8.2,8.625,8.167c0.156-0.034,0.132-0.162,0.102-0.195C8.695,7.938,8.672,7.853,8.642,7.794c-0.031-0.06-0.023-0.136,0.14-0.153C8.944,7.625,9.168,7.708,9.16,7.573s0-0.28,0.046-0.356C9.253,7.142,9.354,7.09,9.299,7.065C9.246,7.04,9.176,7.099,9.121,6.972c-0.054-0.127,0.047-0.22,0.108-0.271c0.02-0.015,0.067-0.06,0.124-0.112C11.234,5.257,13.524,4.466,16,4.466c3.213,0,6.122,1.323,8.214,3.45c-0.008,0.022-0.01,0.052-0.031,0.056c-0.077,0.013-0.166,0.063-0.179-0.051c-0.013-0.114-0.013-0.331-0.102-0.203c-0.089,0.127-0.127,0.127-0.127,0.191c0,0.063,0.076,0.127,0.051,0.241C23.8,8.264,23.8,8.341,23.84,8.341c0.036,0,0.126-0.115,0.239-0.141c0.116-0.025,0.319-0.088,0.332,0.026c0.013,0.115,0.139,0.152,0.013,0.203c-0.128,0.051-0.267,0.026-0.293-0.051c-0.025-0.077-0.114-0.077-0.203-0.013c-0.088,0.063-0.279,0.292-0.279,0.292s-0.306,0.139-0.343,0.114c-0.04-0.025,0.101-0.165,0.203-0.228c0.102-0.064,0.178-0.204,0.14-0.242c-0.038-0.038-0.088-0.279-0.063-0.343c0.025-0.063,0.139-0.152,0.013-0.216c-0.127-0.063-0.217-0.14-0.318-0.178s-0.216,0.152-0.305,0.204c-0.089,0.051-0.076,0.114-0.191,0.127c-0.114,0.013-0.189,0.165,0,0.254c0.191,0.089,0.255,0.152,0.204,0.204c-0.051,0.051-0.267-0.025-0.267-0.025s-0.165-0.076-0.268-0.076c-0.101,0-0.229-0.063-0.33-0.076c-0.102-0.013-0.306-0.013-0.355,0.038c-0.051,0.051-0.179,0.203-0.28,0.152c-0.101-0.051-0.101-0.102-0.241-0.051c-0.14,0.051-0.279-0.038-0.355,0.038c-0.077,0.076-0.013,0.076-0.255,0c-0.241-0.076-0.189,0.051-0.419,0.089s-0.368-0.038-0.432,0.038c-0.064,0.077-0.153,0.217-0.19,0.127c-0.038-0.088,0.126-0.241,0.062-0.292c-0.062-0.051-0.33-0.025-0.367,0.013c-0.039,0.038-0.014,0.178,0.011,0.229c0.026,0.05,0.064,0.254-0.011,0.216c-0.077-0.038-0.064-0.166-0.141-0.152c-0.076,0.013-0.165,0.051-0.203,0.077c-0.038,0.025-0.191,0.025-0.229,0.076c-0.037,0.051,0.014,0.191-0.051,0.203c-0.063,0.013-0.114,0.064-0.254-0.025c-0.14-0.089-0.14-0.038-0.178-0.012c-0.038,0.025-0.216,0.127-0.229,0.012c-0.013-0.114,0.025-0.152-0.089-0.229c-0.115-0.076-0.026-0.076,0.127-0.025c0.152,0.05,0.343,0.075,0.622-0.013c0.28-0.089,0.395-0.127,0.28-0.178c-0.115-0.05-0.229-0.101-0.406-0.127c-0.179-0.025-0.42-0.025-0.7-0.127c-0.279-0.102-0.343-0.14-0.457-0.165c-0.115-0.026-0.813-0.14-1.132-0.089c-0.317,0.051-1.193,0.28-1.245,0.318s-0.128,0.19-0.292,0.318c-0.165,0.127-0.47,0.419-0.712,0.47c-0.241,0.051-0.521,0.254-0.521,0.305c0,0.051,0.101,0.242,0.076,0.28c-0.025,0.038,0.05,0.229,0.191,0.28c0.139,0.05,0.381,0.038,0.393-0.039c0.014-0.076,0.204-0.241,0.217-0.127c0.013,0.115,0.14,0.292,0.114,0.368c-0.025,0.077,0,0.153,0.09,0.14c0.088-0.012,0.559-0.114,0.559-0.114s0.153-0.064,0.127-0.166c-0.026-0.101,0.166-0.241,0.203-0.279c0.038-0.038,0.178-0.191,0.014-0.241c-0.167-0.051-0.293-0.064-0.115-0.216s0.292,0,0.521-0.229c0.229-0.229-0.051-0.292,0.191-0.305c0.241-0.013,0.496-0.025,0.444,0.051c-0.05,0.076-0.342,0.242-0.508,0.318c-0.166,0.077-0.14,0.216-0.076,0.292c0.063,0.076,0.09,0.254,0.204,0.229c0.113-0.025,0.254-0.114,0.38-0.101c0.128,0.012,0.383-0.013,0.42-0.013c0.039,0,0.216,0.178,0.114,0.203c-0.101,0.025-0.229,0.013-0.445,0.025c-0.215,0.013-0.456,0.013-0.456,0.051c0,0.039,0.292,0.127,0.19,0.191c-0.102,0.063-0.203-0.013-0.331-0.026c-0.127-0.012-0.203,0.166-0.241,0.267c-0.039,0.102,0.063,0.28-0.127,0.216c-0.191-0.063-0.331-0.063-0.381-0.038c-0.051,0.025-0.203,0.076-0.331,0.114c-0.126,0.038-0.076-0.063-0.242-0.063c-0.164,0-0.164,0-0.164,0l-0.103,0.013c0,0-0.101-0.063-0.114-0.165c-0.013-0.102,0.05-0.216-0.013-0.241c-0.064-0.026-0.292,0.012-0.33,0.088c-0.038,0.076-0.077,0.216-0.026,0.28c0.052,0.063,0.204,0.19,0.064,0.152c-0.14-0.038-0.317-0.051-0.419,0.026c-0.101,0.076-0.279,0.241-0.279,0.241s-0.318,0.025-0.318,0.102c0,0.077,0,0.178-0.114,0.191c-0.115,0.013-0.268,0.05-0.42,0.076c-0.153,0.025-0.139,0.088-0.317,0.102s-0.204,0.089-0.038,0.114c0.165,0.025,0.418,0.127,0.431,0.241c0.014,0.114-0.013,0.242-0.076,0.356c-0.043,0.079-0.305,0.026-0.458,0.026c-0.152,0-0.456-0.051-0.584,0c-0.127,0.051-0.102,0.305-0.064,0.419c0.039,0.114-0.012,0.178-0.063,0.216c-0.051,0.038-0.065,0.152,0,0.204c0.063,0.051,0.114,0.165,0.166,0.178c0.051,0.013,0.215-0.038,0.279,0.025c0.064,0.064,0.127,0.216,0.165,0.178c0.039-0.038,0.089-0.203,0.153-0.166c0.064,0.039,0.216-0.012,0.331-0.025s0.177-0.14,0.292-0.204c0.114-0.063,0.05-0.063,0.013-0.14c-0.038-0.076,0.114-0.165,0.204-0.254c0.088-0.089,0.253-0.013,0.292-0.115c0.038-0.102,0.051-0.279,0.151-0.267c0.103,0.013,0.243,0.076,0.331,0.076c0.089,0,0.279-0.14,0.332-0.165c0.05-0.025,0.241-0.013,0.267,0.102c0.025,0.114,0.241,0.254,0.292,0.279c0.051,0.025,0.381,0.127,0.433,0.165c0.05,0.038,0.126,0.153,0.152,0.254c0.025,0.102,0.114,0.102,0.128,0.013c0.012-0.089-0.065-0.254,0.025-0.242c0.088,0.013,0.191-0.026,0.191-0.026s-0.243-0.165-0.331-0.203c-0.088-0.038-0.255-0.114-0.331-0.241c-0.076-0.127-0.267-0.153-0.254-0.279c0.013-0.127,0.191-0.051,0.292,0.051c0.102,0.102,0.356,0.241,0.445,0.33c0.088,0.089,0.229,0.127,0.267,0.242c0.039,0.114,0.152,0.241,0.19,0.292c0.038,0.051,0.165,0.331,0.204,0.394c0.038,0.063,0.165-0.012,0.229-0.063c0.063-0.051,0.179-0.076,0.191-0.178c0.013-0.102-0.153-0.178-0.203-0.216c-0.051-0.038,0.127-0.076,0.191-0.127c0.063-0.05,0.177-0.14,0.228-0.063c0.051,0.077,0.026,0.381,0.051,0.432c0.025,0.051,0.279,0.127,0.331,0.191c0.05,0.063,0.267,0.089,0.304,0.051c0.039-0.038,0.242,0.026,0.294,0.038c0.049,0.013,0.202-0.025,0.304-0.05c0.103-0.025,0.204-0.102,0.191,0.063c-0.013,0.165-0.051,0.419-0.179,0.546c-0.127,0.127-0.076,0.191-0.202,0.191c-0.06,0-0.113,0-0.156,0.021c-0.041-0.065-0.098-0.117-0.175-0.097c-0.152,0.038-0.344,0.038-0.47,0.19c-0.128,0.153-0.178,0.165-0.204,0.114c-0.025-0.051,0.369-0.267,0.317-0.331c-0.05-0.063-0.355-0.038-0.521-0.038c-0.166,0-0.305-0.102-0.433-0.127c-0.126-0.025-0.292,0.127-0.418,0.254c-0.128,0.127-0.216,0.038-0.331,0.038c-0.115,0-0.331-0.165-0.331-0.165s-0.216-0.089-0.305-0.089c-0.088,0-0.267-0.165-0.318-0.165c-0.05,0-0.19-0.115-0.088-0.166c0.101-0.05,0.202,0.051,0.101-0.229c-0.101-0.279-0.33-0.216-0.419-0.178c-0.088,0.039-0.724,0.025-0.775,0.025c-0.051,0-0.419,0.127-0.533,0.178c-0.116,0.051-0.318,0.115-0.369,0.14c-0.051,0.025-0.318-0.051-0.433,0.013c-0.151,0.084-0.291,0.216-0.33,0.216c-0.038,0-0.153,0.089-0.229,0.28c-0.077,0.19,0.013,0.355-0.128,0.419c-0.139,0.063-0.394,0.204-0.495,0.305c-0.102,0.101-0.229,0.458-0.355,0.623c-0.127,0.165,0,0.317,0.025,0.419c0.025,0.101,0.114,0.292-0.025,0.471c-0.14,0.178-0.127,0.266-0.191,0.279c-0.063,0.013,0.063,0.063,0.088,0.19c0.025,0.128-0.114,0.255,0.128,0.369c0.241,0.113,0.355,0.217,0.418,0.367c0.064,0.153,0.382,0.407,0.382,0.407s0.229,0.205,0.344,0.293c0.114,0.089,0.152,0.038,0.177-0.05c0.025-0.09,0.178-0.104,0.355-0.104c0.178,0,0.305,0.04,0.483,0.014c0.178-0.025,0.356-0.141,0.42-0.166c0.063-0.025,0.279-0.164,0.443-0.063c0.166,0.103,0.141,0.241,0.23,0.332c0.088,0.088,0.24,0.037,0.355-0.051c0.114-0.09,0.064-0.052,0.203,0.025c0.14,0.075,0.204,0.151,0.077,0.267c-0.128,0.113-0.051,0.293-0.128,0.47c-0.076,0.178-0.063,0.203,0.077,0.278c0.14,0.076,0.394,0.548,0.47,0.638c0.077,0.088-0.025,0.342,0.064,0.495c0.089,0.151,0.178,0.254,0.077,0.331c-0.103,0.075-0.28,0.216-0.292,0.47s0.051,0.431,0.102,0.521s0.177,0.331,0.241,0.419c0.064,0.089,0.14,0.305,0.152,0.445c0.013,0.14-0.024,0.306,0.039,0.381c0.064,0.076,0.102,0.191,0.216,0.292c0.115,0.103,0.152,0.318,0.152,0.318s0.039,0.089,0.051,0.229c0.012,0.14,0.025,0.228,0.152,0.292c0.126,0.063,0.215,0.076,0.28,0.013c0.063-0.063,0.381-0.077,0.546-0.063c0.165,0.013,0.355-0.075,0.521-0.19s0.407-0.419,0.496-0.508c0.089-0.09,0.292-0.255,0.268-0.356c-0.025-0.101-0.077-0.203,0.024-0.254c0.102-0.052,0.344-0.152,0.356-0.229c0.013-0.077-0.09-0.395-0.115-0.457c-0.024-0.064,0.064-0.18,0.165-0.306c0.103-0.128,0.421-0.216,0.471-0.267c0.051-0.053,0.191-0.267,0.217-0.433c0.024-0.167-0.051-0.369,0-0.457c0.05-0.09,0.013-0.165-0.103-0.268c-0.114-0.102-0.089-0.407-0.127-0.457c-0.037-0.051-0.013-0.319,0.063-0.345c0.076-0.023,0.242-0.279,0.344-0.393c0.102-0.114,0.394-0.47,0.534-0.496c0.139-0.025,0.355-0.229,0.368-0.343c0.013-0.115,0.38-0.547,0.394-0.635c0.013-0.09,0.166-0.42,0.102-0.497c-0.062-0.076-0.559,0.115-0.622,0.141c-0.064,0.025-0.241,0.127-0.446,0.113c-0.202-0.013-0.114-0.177-0.127-0.254c-0.012-0.076-0.228-0.368-0.279-0.381c-0.051-0.012-0.203-0.166-0.267-0.317c-0.063-0.153-0.152-0.343-0.254-0.458c-0.102-0.114-0.165-0.38-0.268-0.559c-0.101-0.178-0.189-0.407-0.279-0.572c-0.021-0.041-0.045-0.079-0.067-0.117c0.118-0.029,0.289-0.082,0.31-0.009c0.024,0.088,0.165,0.279,0.19,0.419s0.165,0.089,0.178,0.216c0.014,0.128,0.14,0.433,0.19,0.47c0.052,0.038,0.28,0.242,0.318,0.318c0.038,0.076,0.089,0.178,0.127,0.369c0.038,0.19,0.076,0.444,0.179,0.482c0.102,0.038,0.444-0.064,0.508-0.102s0.482-0.242,0.635-0.255c0.153-0.012,0.179-0.115,0.368-0.152c0.191-0.038,0.331-0.177,0.458-0.28c0.127-0.101,0.28-0.355,0.33-0.444c0.052-0.088,0.179-0.152,0.115-0.253c-0.063-0.103-0.331-0.254-0.433-0.268c-0.102-0.012-0.089-0.178-0.152-0.178s-0.051,0.088-0.178,0.153c-0.127,0.063-0.255,0.19-0.344,0.165s0.026-0.089-0.113-0.203s-0.192-0.14-0.192-0.228c0-0.089-0.278-0.255-0.304-0.382c-0.026-0.127,0.19-0.305,0.254-0.19c0.063,0.114,0.115,0.292,0.279,0.368c0.165,0.076,0.318,0.204,0.395,0.229c0.076,0.025,0.267-0.14,0.33-0.114c0.063,0.024,0.191,0.253,0.306,0.292c0.113,0.038,0.495,0.051,0.559,0.051s0.33,0.013,0.381-0.063c0.051-0.076,0.089-0.076,0.153-0.076c0.062,0,0.177,0.229,0.267,0.254c0.089,0.025,0.254,0.013,0.241,0.179c-0.012,0.164,0.076,0.305,0.165,0.317c0.09,0.012,0.293-0.191,0.293-0.191s0,0.318-0.012,0.433c-0.014,0.113,0.139,0.534,0.139,0.534s0.19,0.393,0.241,0.482s0.267,0.355,0.267,0.47c0,0.115,0.025,0.293,0.103,0.293c0.076,0,0.152-0.203,0.24-0.331c0.091-0.126,0.116-0.305,0.153-0.432c0.038-0.127,0.038-0.356,0.038-0.444c0-0.09,0.075-0.166,0.255-0.242c0.178-0.076,0.304-0.292,0.456-0.407c0.153-0.115,0.141-0.305,0.446-0.305c0.305,0,0.278,0,0.355-0.077c0.076-0.076,0.151-0.127,0.19,0.013c0.038,0.14,0.254,0.343,0.292,0.394c0.038,0.052,0.114,0.191,0.103,0.344c-0.013,0.152,0.012,0.33,0.075,0.33s0.191-0.216,0.191-0.216s0.279-0.189,0.267,0.013c-0.014,0.203,0.025,0.419,0.025,0.545c0,0.053,0.042,0.135,0.088,0.21c-0.005,0.059-0.004,0.119-0.009,0.178C27.388,17.153,27.387,17.327,27.436,17.39zM20.382,12.064c0.076,0.05,0.102,0.127,0.152,0.203c0.052,0.076,0.14,0.05,0.203,0.114c0.063,0.064-0.178,0.14-0.075,0.216c0.101,0.077,0.151,0.381,0.165,0.458c0.013,0.076-0.279,0.114-0.369,0.102c-0.089-0.013-0.354-0.102-0.445-0.127c-0.089-0.026-0.139-0.343-0.025-0.331c0.116,0.013,0.141-0.025,0.267-0.139c0.128-0.115-0.189-0.166-0.278-0.191c-0.089-0.025-0.268-0.305-0.331-0.394c-0.062-0.089-0.014-0.228,0.141-0.331c0.076-0.051,0.279,0.063,0.381,0c0.101-0.063,0.203-0.14,0.241-0.165c0.039-0.025,0.293,0.038,0.33,0.114c0.039,0.076,0.191,0.191,0.141,0.229c-0.052,0.038-0.281,0.076-0.356,0c-0.075-0.077-0.255,0.012-0.268,0.152C20.242,12.115,20.307,12.013,20.382,12.064zM16.875,12.28c-0.077-0.025,0.025-0.178,0.102-0.229c0.075-0.051,0.164-0.178,0.241-0.305c0.076-0.127,0.178-0.14,0.241-0.127c0.063,0.013,0.203,0.241,0.241,0.318c0.038,0.076,0.165-0.026,0.217-0.051c0.05-0.025,0.127-0.102,0.14-0.165s0.127-0.102,0.254-0.102s0.013,0.102-0.076,0.127c-0.09,0.025-0.038,0.077,0.113,0.127c0.153,0.051,0.293,0.191,0.459,0.279c0.165,0.089,0.19,0.267,0.088,0.292c-0.101,0.025-0.406,0.051-0.521,0.038c-0.114-0.013-0.254-0.127-0.419-0.153c-0.165-0.025-0.369-0.013-0.433,0.077s-0.292,0.05-0.395,0.05c-0.102,0-0.228,0.127-0.253,0.077C16.875,12.534,16.951,12.306,16.875,12.28zM17.307,9.458c0.063-0.178,0.419,0.038,0.355,0.127C17.599,9.675,17.264,9.579,17.307,9.458zM17.802,18.584c0.063,0.102-0.14,0.431-0.254,0.407c-0.113-0.027-0.076-0.318-0.038-0.382C17.548,18.545,17.769,18.529,17.802,18.584zM13.189,12.674c0.025-0.051-0.039-0.153-0.127-0.013C13.032,12.71,13.164,12.725,13.189,12.674zM20.813,8.035c0.141,0.076,0.339,0.107,0.433,0.013c0.076-0.076,0.013-0.204-0.05-0.216c-0.064-0.013-0.104-0.115,0.062-0.203c0.165-0.089,0.343-0.204,0.534-0.229c0.19-0.025,0.622-0.038,0.774,0c0.152,0.039,0.382-0.166,0.445-0.254s-0.203-0.152-0.279-0.051c-0.077,0.102-0.444,0.076-0.521,0.051c-0.076-0.025-0.686,0.102-0.812,0.102c-0.128,0-0.179,0.152-0.356,0.229c-0.179,0.076-0.42,0.191-0.509,0.229c-0.088,0.038-0.177,0.19-0.101,0.216C20.509,7.947,20.674,7.959,20.813,8.035zM14.142,12.674c0.064-0.089-0.051-0.217-0.114-0.217c-0.12,0-0.178,0.191-0.103,0.254C14.002,12.776,14.078,12.763,14.142,12.674zM14.714,13.017c0.064,0.025,0.114,0.102,0.165,0.114c0.052,0.013,0.217,0,0.167-0.127s-0.167-0.127-0.204-0.127c-0.038,0-0.203-0.038-0.267,0C14.528,12.905,14.65,12.992,14.714,13.017zM11.308,10.958c0.101,0.013,0.217-0.063,0.305-0.101c0.088-0.038,0.216-0.114,0.216-0.229c0-0.114-0.025-0.216-0.077-0.267c-0.051-0.051-0.14-0.064-0.216-0.051c-0.115,0.02-0.127,0.14-0.203,0.14c-0.076,0-0.165,0.025-0.14,0.114s0.077,0.152,0,0.19C11.117,10.793,11.205,10.946,11.308,10.958zM11.931,10.412c0.127,0.051,0.394,0.102,0.292,0.153c-0.102,0.051-0.28,0.19-0.305,0.267s0.216,0.153,0.216,0.153s-0.077,0.089-0.013,0.114c0.063,0.025,0.102-0.089,0.203-0.089c0.101,0,0.304,0.063,0.406,0.063c0.103,0,0.267-0.14,0.254-0.229c-0.013-0.089-0.14-0.229-0.254-0.28c-0.113-0.051-0.241-0.28-0.317-0.331c-0.076-0.051,0.076-0.178-0.013-0.267c-0.09-0.089-0.153-0.076-0.255-0.14c-0.102-0.063-0.191,0.013-0.254,0.089c-0.063,0.076-0.14-0.013-0.217,0.012c-0.102,0.035-0.063,0.166-0.012,0.229C11.714,10.221,11.804,10.361,11.931,10.412zM24.729,17.198c-0.083,0.037-0.153,0.47,0,0.521c0.152,0.052,0.241-0.202,0.191-0.267C24.868,17.39,24.843,17.147,24.729,17.198zM20.114,20.464c-0.159-0.045-0.177,0.166-0.304,0.306c-0.128,0.141-0.267,0.254-0.317,0.241c-0.052-0.013-0.331,0.089-0.242,0.279c0.089,0.191,0.076,0.382-0.013,0.472c-0.089,0.088,0.076,0.342,0.052,0.482c-0.026,0.139,0.037,0.229,0.215,0.229s0.242-0.064,0.318-0.229c0.076-0.166,0.088-0.331,0.164-0.47c0.077-0.141,0.141-0.434,0.179-0.51c0.038-0.075,0.114-0.316,0.102-0.457C20.254,20.669,20.204,20.489,20.114,20.464zM10.391,8.802c-0.069-0.06-0.229-0.102-0.306-0.11c-0.076-0.008-0.152,0.06-0.321,0.06c-0.168,0-0.279,0.067-0.347,0C9.349,8.684,9.068,8.65,9.042,8.692C9.008,8.749,8.941,8.751,9.008,8.87c0.069,0.118,0.12,0.186,0.179,0.178s0.262-0.017,0.288,0.051C9.5,9.167,9.569,9.226,9.712,9.184c0.145-0.042,0.263-0.068,0.296-0.119c0.033-0.051,0.263-0.059,0.263-0.059S10.458,8.861,10.391,8.802z'
 }));
 
 // Adds click event to button container.
 // On click, goes back to world view, hides smaller provincial borders, hides button.
-backButtonContainer.events.on('click', function() {
-    map.goHome();
-    world.show();
-    province.hide();
-    backButtonContainer.hide();
+backButtonContainer.events.on('click', function () {
+  map.goHome();
+  world.show();
+  province.hide();
+  backButtonContainer.hide();
 });
 
 // Creates new locations clustered point series thing.
-let locations = map.series.push(am5map.ClusteredPointSeries.new(mapContainer, {}));
+let locations = map.series.push(am5map.MapPointSeries.new(mapContainer, {
+  maskBullets: false,
 
-// Sets containers for cluttered location points.
-// Containers increase in size based on how many locations are contained within
-// Click event to zoom in on container
-locations.set('clusteredBullet', function(mapContainer) {
-    let container = am5.Container.new(mapContainer, {
-        cursorOverStyle:'pointer'
-    });
-    let circle1 = container.children.push(am5.Circle.new(mapContainer, {
-        radius: 8,
-        tooltipY: 0,
-        fill: am5.color(0xff8c00)
-    }));
-    
-    let circle2 = container.children.push(am5.Circle.new(mapContainer, {
-    radius: 12,
-    fillOpacity: 0.3,
-    tooltipY: 0,
-    fill: am5.color(0xff8c00)
-    }));
+}));
 
-    let circle3 = container.children.push(am5.Circle.new(mapContainer, {
-    radius: 16,
-    fillOpacity: 0.3,
-    tooltipY: 0,
-    fill: am5.color(0xff8c00)
-    }));
-
-    let label = container.children.push(am5.Label.new(mapContainer, {
+locations.bullets.push(function () {
+  let pin = am5.Picture.new(mapContainer, {
+    width: 32,
+    height: 32,
     centerX: am5.p50,
-    centerY: am5.p50,
-    fill: am5.color(0xffffff),
-    populateText: true,
-    fontSize: "8",
-    text: "{value}"
-    }));
+    centerY: am5.p100,
+    src: 'img/assets/map-pin.png',
+    tooltipText: 'hi',
+    tooltip: am5.Tooltip.new(mapContainer, {
+      labelHTML: "<div class='hoverContainer'><h2 class='hoverHeader'>{title}</h2><img src='{src}' alt='{title}'></div>",
+    })
+  });
 
-    container.events.on('click', function(e) {
-        locations.zoomToCluster(e.target.dataItem);
-        console.log('clicked: ' + e.target.dataItem);
-    });
+  let bullet = am5.Bullet.new(mapContainer, {
+    sprite: pin,
+  });
 
-    return am5.Bullet.new(mapContainer, {
-        sprite: container
-    });
+
+
+  pin.events.on('click', function (e) {
+    console.log('click');
+    handlePopup(e.target.dataItem.dataContext);
+  });
+  return bullet;
 });
 
-// Creates new location bullets.
-// Size, shape, color, tooltip text, etc go here for bullets.
-// Adds click event listener to each circle.
-locations.bullets.push(function() {
-    let circle = am5.Circle.new(mapContainer, {
-        radius: 6,
-        tooltipY: 0,
-        fill: am5.color(0x008c00),
-        tooltipText: '{title}'
-    });
 
-    circle.events.on('click', function(e) {
-        alert('Pop up placeholder');
-    });
-    return am5.Bullet.new(mapContainer, {
-        sprite: circle
-    });
-});
 
 // List of cities and their coordinates. Copied because obviously.
 let cities = [
-    { title: "Vienna", latitude: 48.2092, longitude: 16.3728 },
-    { title: "Minsk", latitude: 53.9678, longitude: 27.5766 },
-    { title: "Brussels", latitude: 50.8371, longitude: 4.3676 },
-    { title: "Sarajevo", latitude: 43.8608, longitude: 18.4214 },
-    { title: "Sofia", latitude: 42.7105, longitude: 23.3238 },
-    { title: "Zagreb", latitude: 45.815, longitude: 15.9785 },
-    { title: "Pristina", latitude: 42.666667, longitude: 21.166667 },
-    { title: "Prague", latitude: 50.0878, longitude: 14.4205 },
-    { title: "Copenhagen", latitude: 55.6763, longitude: 12.5681 },
-    { title: "Tallinn", latitude: 59.4389, longitude: 24.7545 },
-    { title: "Helsinki", latitude: 60.1699, longitude: 24.9384 },
-    { title: "Paris", latitude: 48.8567, longitude: 2.351 },
-    { title: "Berlin", latitude: 52.5235, longitude: 13.4115 },
-    { title: "Athens", latitude: 37.9792, longitude: 23.7166 },
-    { title: "Budapest", latitude: 47.4984, longitude: 19.0408 },
-    { title: "Reykjavik", latitude: 64.1353, longitude: -21.8952 },
-    { title: "Dublin", latitude: 53.3441, longitude: -6.2675 },
-    { title: "Rome", latitude: 41.8955, longitude: 12.4823 },
-    { title: "Riga", latitude: 56.9465, longitude: 24.1049 },
-    { title: "Vaduz", latitude: 47.1411, longitude: 9.5215 },
-    { title: "Vilnius", latitude: 54.6896, longitude: 25.2799 },
-    { title: "Luxembourg", latitude: 49.61, longitude: 6.1296 },
-    { title: "Skopje", latitude: 42.0024, longitude: 21.4361 },
-    { title: "Valletta", latitude: 35.9042, longitude: 14.5189 },
-    { title: "Chisinau", latitude: 47.0167, longitude: 28.8497 },
-    { title: "Monaco", latitude: 43.7325, longitude: 7.4189 },
-    { title: "Podgorica", latitude: 42.4602, longitude: 19.2595 },
-    { title: "Amsterdam", latitude: 52.3738, longitude: 4.891 },
-    { title: "Oslo", latitude: 59.9138, longitude: 10.7387 },
-    { title: "Warsaw", latitude: 52.2297, longitude: 21.0122 },
-    { title: "Lisbon", latitude: 38.7072, longitude: -9.1355 },
-    { title: "Bucharest", latitude: 44.4479, longitude: 26.0979 },
-    { title: "Moscow", latitude: 55.7558, longitude: 37.6176 },
-    { title: "San Marino", latitude: 43.9424, longitude: 12.4578 },
-    { title: "Belgrade", latitude: 44.8048, longitude: 20.4781 },
-    { title: "Bratislava", latitude: 48.2116, longitude: 17.1547 },
-    { title: "Ljubljana", latitude: 46.0514, longitude: 14.506 },
-    { title: "Madrid", latitude: 40.4167, longitude: -3.7033 },
-    { title: "Stockholm", latitude: 59.3328, longitude: 18.0645 },
-    { title: "Bern", latitude: 46.948, longitude: 7.4481 },
-    { title: "Kiev", latitude: 50.4422, longitude: 30.5367 },
-    { title: "London", latitude: 51.5002, longitude: -0.1262 },
-    { title: "Gibraltar", latitude: 36.1377, longitude: -5.3453 },
-    { title: "Saint Peter Port", latitude: 49.466, longitude: -2.5522 },
-    { title: "Douglas", latitude: 54.167, longitude: -4.4821 },
-    { title: "Saint Helier", latitude: 49.1919, longitude: -2.1071 },
-    { title: "Longyearbyen", latitude: 78.2186, longitude: 15.6488 },
-    { title: "Kabul", latitude: 34.5155, longitude: 69.1952 },
-    { title: "Yerevan", latitude: 40.1596, longitude: 44.509 },
-    { title: "Baku", latitude: 40.3834, longitude: 49.8932 },
-    { title: "Manama", latitude: 26.1921, longitude: 50.5354 },
-    { title: "Dhaka", latitude: 23.7106, longitude: 90.3978 },
-    { title: "Thimphu", latitude: 27.4405, longitude: 89.673 },
-    { title: "Bandar Seri Begawan", latitude: 4.9431, longitude: 114.9425 },
-    { title: "Phnom Penh", latitude: 11.5434, longitude: 104.8984 },
-    { title: "Peking", latitude: 39.9056, longitude: 116.3958 },
-    { title: "Nicosia", latitude: 35.1676, longitude: 33.3736 },
-    { title: "T'bilisi", latitude: 41.701, longitude: 44.793 },
-    { title: "New Delhi", latitude: 28.6353, longitude: 77.225 },
-    { title: "Jakarta", latitude: -6.1862, longitude: 106.8063 },
-    { title: "Teheran", latitude: 35.7061, longitude: 51.4358 },
-    { title: "Baghdad", latitude: 33.3157, longitude: 44.3922 },
-    { title: "Jerusalem", latitude: 31.76, longitude: 35.17 },
-    { title: "Tokyo", latitude: 35.6785, longitude: 139.6823 },
-    { title: "Amman", latitude: 31.9394, longitude: 35.9349 },
-    { title: "Astana", latitude: 51.1796, longitude: 71.4475 },
-    { title: "Kuwait", latitude: 29.3721, longitude: 47.9824 },
-    { title: "Bishkek", latitude: 42.8679, longitude: 74.5984 },
-    { title: "Vientiane", latitude: 17.9689, longitude: 102.6137 },
-    { title: "Beyrouth / Beirut", latitude: 33.8872, longitude: 35.5134 },
-    { title: "Kuala Lumpur", latitude: 3.1502, longitude: 101.7077 },
-    { title: "Ulan Bator", latitude: 47.9138, longitude: 106.922 },
-    { title: "Pyinmana", latitude: 19.7378, longitude: 96.2083 },
-    { title: "Kathmandu", latitude: 27.7058, longitude: 85.3157 },
-    { title: "Muscat", latitude: 23.6086, longitude: 58.5922 },
-    { title: "Islamabad", latitude: 33.6751, longitude: 73.0946 },
-    { title: "Manila", latitude: 14.579, longitude: 120.9726 },
-    { title: "Doha", latitude: 25.2948, longitude: 51.5082 },
-    { title: "Riyadh", latitude: 24.6748, longitude: 46.6977 },
-    { title: "Singapore", latitude: 1.2894, longitude: 103.85 },
-    { title: "Seoul", latitude: 37.5139, longitude: 126.9828 },
-    { title: "Colombo", latitude: 6.9155, longitude: 79.8572 },
-    { title: "Damascus", latitude: 33.5158, longitude: 36.2939 },
-    { title: "Taipei", latitude: 25.0338, longitude: 121.5645 },
-    { title: "Dushanbe", latitude: 38.5737, longitude: 68.7738 },
-    { title: "Bangkok", latitude: 13.7573, longitude: 100.502 },
-    { title: "Dili", latitude: -8.5662, longitude: 125.588 },
-    { title: "Ankara", latitude: 39.9439, longitude: 32.856 },
-    { title: "Ashgabat", latitude: 37.9509, longitude: 58.3794 },
-    { title: "Abu Dhabi", latitude: 24.4764, longitude: 54.3705 },
-    { title: "Tashkent", latitude: 41.3193, longitude: 69.2481 },
-    { title: "Hanoi", latitude: 21.0341, longitude: 105.8372 },
-    { title: "Sanaa", latitude: 15.3556, longitude: 44.2081 },
-    { title: "Buenos Aires", latitude: -34.6118, longitude: -58.4173 },
-    { title: "Bridgetown", latitude: 13.0935, longitude: -59.6105 },
-    { title: "Belmopan", latitude: 17.2534, longitude: -88.7713 },
-    { title: "Sucre", latitude: -19.0421, longitude: -65.2559 },
-    { title: "Brasilia", latitude: -15.7801, longitude: -47.9292 },
-    { title: "Ottawa", latitude: 45.4235, longitude: -75.6979 },
-    { title: "Santiago", latitude: -33.4691, longitude: -70.642 },
-    { title: "Bogota", latitude: 4.6473, longitude: -74.0962 },
-    { title: "San Jose", latitude: 9.9402, longitude: -84.1002 },
-    { title: "Havana", latitude: 23.1333, longitude: -82.3667 },
-    { title: "Roseau", latitude: 15.2976, longitude: -61.39 },
-    { title: "Santo Domingo", latitude: 18.479, longitude: -69.8908 },
-    { title: "Quito", latitude: -0.2295, longitude: -78.5243 },
-    { title: "San Salvador", latitude: 13.7034, longitude: -89.2073 },
-    { title: "Guatemala", latitude: 14.6248, longitude: -90.5328 },
-    { title: "Ciudad de Mexico", latitude: 19.4271, longitude: -99.1276 },
-    { title: "Managua", latitude: 12.1475, longitude: -86.2734 },
-    { title: "Panama", latitude: 8.9943, longitude: -79.5188 },
-    { title: "Asuncion", latitude: -25.3005, longitude: -57.6362 },
-    { title: "Lima", latitude: -12.0931, longitude: -77.0465 },
-    { title: "Castries", latitude: 13.9972, longitude: -60.0018 },
-    { title: "Paramaribo", latitude: 5.8232, longitude: -55.1679 },
-    { title: "Washington D.C.", latitude: 38.8921, longitude: -77.0241 },
-    { title: "Montevideo", latitude: -34.8941, longitude: -56.0675 },
-    { title: "Caracas", latitude: 10.4961, longitude: -66.8983 },
-    { title: "Oranjestad", latitude: 12.5246, longitude: -70.0265 },
-    { title: "Cayenne", latitude: 4.9346, longitude: -52.3303 },
-    { title: "Plymouth", latitude: 16.6802, longitude: -62.2014 },
-    { title: "San Juan", latitude: 18.45, longitude: -66.0667 },
-    { title: "Algiers", latitude: 36.7755, longitude: 3.0597 },
-    { title: "Luanda", latitude: -8.8159, longitude: 13.2306 },
-    { title: "Porto-Novo", latitude: 6.4779, longitude: 2.6323 },
-    { title: "Gaborone", latitude: -24.657, longitude: 25.9089 },
-    { title: "Ouagadougou", latitude: 12.3569, longitude: -1.5352 },
-    { title: "Bujumbura", latitude: -3.3818, longitude: 29.3622 },
-    { title: "Yaounde", latitude: 3.8612, longitude: 11.5217 },
-    { title: "Bangui", latitude: 4.3621, longitude: 18.5873 },
-    { title: "Brazzaville", latitude: -4.2767, longitude: 15.2662 },
-    { title: "Kinshasa", latitude: -4.3369, longitude: 15.3271 },
-    { title: "Yamoussoukro", latitude: 6.8067, longitude: -5.2728 },
-    { title: "Djibouti", latitude: 11.5806, longitude: 43.1425 },
-    { title: "Cairo", latitude: 30.0571, longitude: 31.2272 },
-    { title: "Asmara", latitude: 15.3315, longitude: 38.9183 },
-    { title: "Addis Abeba", latitude: 9.0084, longitude: 38.7575 },
-    { title: "Libreville", latitude: 0.3858, longitude: 9.4496 },
-    { title: "Banjul", latitude: 13.4399, longitude: -16.6775 },
-    { title: "Accra", latitude: 5.5401, longitude: -0.2074 },
-    { title: "Conakry", latitude: 9.537, longitude: -13.6785 },
-    { title: "Bissau", latitude: 11.8598, longitude: -15.5875 },
-    { title: "Nairobi", latitude: -1.2762, longitude: 36.7965 },
-    { title: "Maseru", latitude: -29.2976, longitude: 27.4854 },
-    { title: "Monrovia", latitude: 6.3106, longitude: -10.8047 },
-    { title: "Tripoli", latitude: 32.883, longitude: 13.1897 },
-    { title: "Antananarivo", latitude: -18.9201, longitude: 47.5237 },
-    { title: "Lilongwe", latitude: -13.9899, longitude: 33.7703 },
-    { title: "Bamako", latitude: 12.653, longitude: -7.9864 },
-    { title: "Nouakchott", latitude: 18.0669, longitude: -15.99 },
-    { title: "Port Louis", latitude: -20.1654, longitude: 57.4896 },
-    { title: "Rabat", latitude: 33.9905, longitude: -6.8704 },
-    { title: "Maputo", latitude: -25.9686, longitude: 32.5804 },
-    { title: "Windhoek", latitude: -22.5749, longitude: 17.0805 },
-    { title: "Niamey", latitude: 13.5164, longitude: 2.1157 },
-    { title: "Abuja", latitude: 9.058, longitude: 7.4891 },
-    { title: "Kigali", latitude: -1.9441, longitude: 30.0619 },
-    { title: "Dakar", latitude: 14.6953, longitude: -17.4439 },
-    { title: "Freetown", latitude: 8.4697, longitude: -13.2659 },
-    { title: "Mogadishu", latitude: 2.0411, longitude: 45.3426 },
-    { title: "Pretoria", latitude: -25.7463, longitude: 28.1876 },
-    { title: "Mbabane", latitude: -26.3186, longitude: 31.141 },
-    { title: "Dodoma", latitude: -6.167, longitude: 35.7497 },
-    { title: "Lome", latitude: 6.1228, longitude: 1.2255 },
-    { title: "Tunis", latitude: 36.8117, longitude: 10.1761 }
-  ];
+  { title: "Kyoto", latitude: 35.0116, longitude: 135.768326, imagePath: 'img/assets/greentea.jpg' },
+  { title: "London", latitude: 51.5072, longitude: -0.1276, imagePath: 'img/assets/Earl-Grey-tea.jpg' },
+  { title: "Los Angeles", latitude: 34.0549, longitude: -118.2426, imagePath: 'img/assets/Chamomile.jpg' },
+  { title: "Buenos Aires", latitude: -34.6037, longitude: -58.3816, imagePath: 'img/assets/yerba-mate-tea.jpg' },
+  { title: "Cape Town", latitude: -33.9249, longitude: 18.4241, imagePath: 'img/assets/South-African-Rooibos-tea.jpg' },
+  { title: "Sydney", latitude: -33.8688, longitude: 151.2093, imagePath: 'img/assets/Australian-Lemon-Myrtle-Tea.jpg' }
+];
 
 // Loops through and pushes all cities into addCity function
 for (let i = 0; i < cities.length; i++) {
-let city = cities[i];
-addCity(city.longitude, city.latitude, city.title);
+  let city = cities[i];
+  addCity(city.longitude, city.latitude, city.title, city.imagePath);
 }
 
 // Adds city data into locations.data
-function addCity(long, lat, title) {
-    locations.data.push({
-        geometry: { 
-            type: 'Point', 
-            coordinates: [long, lat] 
-        },
-        title: title
-    });
+function addCity(long, lat, title, path) {
+  locations.data.push({
+    geometry: {
+      type: 'Point',
+      coordinates: [long, lat]
+    },
+    title: title,
+    src: path
+  });
 }
+
+// let modal = am5.Modal.new(mapContainer, {
+//   content: ""
+// });
+
+
+// function openModal() {
+//   if (!modalSetup) {
+//     let closeButton = document.createElement('input');
+//     closeButton.type = 'button';
+//     closeButton.setAttribute('id', 'closeButton');
+//     closeButton.value = 'X';
+//     closeButton.addEventListener('click', function () {
+//       modal.dispose();
+//     });
+
+//     modal.getPrivate('content').appendChild(closeButton);
+
+//     modalSetup = true;
+//   }
+//   modal.open();
+// }
+
+function handlePopup(target) {
+  console.log(target);
+  let section = document.getElementById('popup');
+  let div = document.createElement('div');
+  let img = document.createElement('img');
+  let name = document.createElement('h2');
+  let about = document.createElement('p');
+
+  let favoriteDiv = document.createElement('div');
+  let heart = document.createElement('img');
+  let fav = document.createElement('p');
+
+  let linkDiv = document.createElement('div');
+  let linkImg = document.createElement('img');
+  let linkText = document.createElement('p');
+
+  let close = document.createElement('button');
+
+  // let popupContainer = map.children.push(am5.Container.new(mapContainer, {
+  //   width: am5.p100,
+  //   height: am5.p70,
+  //   x: am5.p50,
+  //   y: am5.p50,
+  //   paddingTop: 5,
+  //   paddingRight: 10,
+  //   paddingBottom: 5,
+  //   interactiveChildren: true,
+  //   layout: mapContainer.horizontalLayout,
+  //   cursorOverStyle: "pointer",
+  //   background: am5.RoundedRectangle.new(mapContainer, {
+  //     fill: am5.color(0xc16632),
+  //     fillOpacity: .9
+  //   }),
+  //   visible: true
+  // }));
+  // let popupLabel = popupContainer.children.push(am5.Label.new(mapContainer, {
+  //   text: 'Back to world view',
+  //   centerY: am5.p50
+  // }));
+  // let closeButtonContainer = popupContainer.children.push(am5.Container.new(mapContainer, {
+  // }));
+  // let closeButton = closeButtonContainer.children.push(am5.Graphics.new(mapContainer, {
+  //   width: 10,
+  //   height: 10,
+  //   centerY: am5.p50,
+  //   fill: am5.color(0x000000),
+  //   svgPath: 'M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466zM27.436,17.39c0.001,0.002,0.004,0.002,0.005,0.004c-0.022,0.187-0.054,0.37-0.085,0.554c-0.015-0.012-0.034-0.025-0.047-0.036c-0.103-0.09-0.254-0.128-0.318-0.115c-0.157,0.032,0.229,0.305,0.267,0.342c0.009,0.009,0.031,0.03,0.062,0.058c-1.029,5.312-5.709,9.338-11.319,9.338c-4.123,0-7.736-2.18-9.776-5.441c0.123-0.016,0.24-0.016,0.28-0.076c0.051-0.077,0.102-0.241,0.178-0.331c0.077-0.089,0.165-0.229,0.127-0.292c-0.039-0.064,0.101-0.344,0.088-0.419c-0.013-0.076-0.127-0.256,0.064-0.407s0.394-0.382,0.407-0.444c0.012-0.063,0.166-0.331,0.152-0.458c-0.012-0.127-0.152-0.28-0.24-0.318c-0.09-0.037-0.28-0.05-0.356-0.151c-0.077-0.103-0.292-0.203-0.368-0.178c-0.076,0.025-0.204,0.05-0.305-0.015c-0.102-0.062-0.267-0.139-0.33-0.189c-0.065-0.05-0.229-0.088-0.305-0.088c-0.077,0-0.065-0.052-0.178,0.101c-0.114,0.153,0,0.204-0.204,0.177c-0.204-0.023,0.025-0.036,0.141-0.189c0.113-0.152-0.013-0.242-0.141-0.203c-0.126,0.038-0.038,0.115-0.241,0.153c-0.203,0.036-0.203-0.09-0.076-0.115s0.355-0.139,0.355-0.19c0-0.051-0.025-0.191-0.127-0.191s-0.077-0.126-0.229-0.291c-0.092-0.101-0.196-0.164-0.299-0.204c-0.09-0.579-0.15-1.167-0.15-1.771c0-2.844,1.039-5.446,2.751-7.458c0.024-0.02,0.048-0.034,0.069-0.036c0.084-0.009,0.31-0.025,0.51-0.059c0.202-0.034,0.418-0.161,0.489-0.153c0.069,0.008,0.241,0.008,0.186-0.042C8.417,8.2,8.339,8.082,8.223,8.082S8.215,7.896,8.246,7.896c0.03,0,0.186,0.025,0.178,0.11C8.417,8.091,8.471,8.2,8.625,8.167c0.156-0.034,0.132-0.162,0.102-0.195C8.695,7.938,8.672,7.853,8.642,7.794c-0.031-0.06-0.023-0.136,0.14-0.153C8.944,7.625,9.168,7.708,9.16,7.573s0-0.28,0.046-0.356C9.253,7.142,9.354,7.09,9.299,7.065C9.246,7.04,9.176,7.099,9.121,6.972c-0.054-0.127,0.047-0.22,0.108-0.271c0.02-0.015,0.067-0.06,0.124-0.112C11.234,5.257,13.524,4.466,16,4.466c3.213,0,6.122,1.323,8.214,3.45c-0.008,0.022-0.01,0.052-0.031,0.056c-0.077,0.013-0.166,0.063-0.179-0.051c-0.013-0.114-0.013-0.331-0.102-0.203c-0.089,0.127-0.127,0.127-0.127,0.191c0,0.063,0.076,0.127,0.051,0.241C23.8,8.264,23.8,8.341,23.84,8.341c0.036,0,0.126-0.115,0.239-0.141c0.116-0.025,0.319-0.088,0.332,0.026c0.013,0.115,0.139,0.152,0.013,0.203c-0.128,0.051-0.267,0.026-0.293-0.051c-0.025-0.077-0.114-0.077-0.203-0.013c-0.088,0.063-0.279,0.292-0.279,0.292s-0.306,0.139-0.343,0.114c-0.04-0.025,0.101-0.165,0.203-0.228c0.102-0.064,0.178-0.204,0.14-0.242c-0.038-0.038-0.088-0.279-0.063-0.343c0.025-0.063,0.139-0.152,0.013-0.216c-0.127-0.063-0.217-0.14-0.318-0.178s-0.216,0.152-0.305,0.204c-0.089,0.051-0.076,0.114-0.191,0.127c-0.114,0.013-0.189,0.165,0,0.254c0.191,0.089,0.255,0.152,0.204,0.204c-0.051,0.051-0.267-0.025-0.267-0.025s-0.165-0.076-0.268-0.076c-0.101,0-0.229-0.063-0.33-0.076c-0.102-0.013-0.306-0.013-0.355,0.038c-0.051,0.051-0.179,0.203-0.28,0.152c-0.101-0.051-0.101-0.102-0.241-0.051c-0.14,0.051-0.279-0.038-0.355,0.038c-0.077,0.076-0.013,0.076-0.255,0c-0.241-0.076-0.189,0.051-0.419,0.089s-0.368-0.038-0.432,0.038c-0.064,0.077-0.153,0.217-0.19,0.127c-0.038-0.088,0.126-0.241,0.062-0.292c-0.062-0.051-0.33-0.025-0.367,0.013c-0.039,0.038-0.014,0.178,0.011,0.229c0.026,0.05,0.064,0.254-0.011,0.216c-0.077-0.038-0.064-0.166-0.141-0.152c-0.076,0.013-0.165,0.051-0.203,0.077c-0.038,0.025-0.191,0.025-0.229,0.076c-0.037,0.051,0.014,0.191-0.051,0.203c-0.063,0.013-0.114,0.064-0.254-0.025c-0.14-0.089-0.14-0.038-0.178-0.012c-0.038,0.025-0.216,0.127-0.229,0.012c-0.013-0.114,0.025-0.152-0.089-0.229c-0.115-0.076-0.026-0.076,0.127-0.025c0.152,0.05,0.343,0.075,0.622-0.013c0.28-0.089,0.395-0.127,0.28-0.178c-0.115-0.05-0.229-0.101-0.406-0.127c-0.179-0.025-0.42-0.025-0.7-0.127c-0.279-0.102-0.343-0.14-0.457-0.165c-0.115-0.026-0.813-0.14-1.132-0.089c-0.317,0.051-1.193,0.28-1.245,0.318s-0.128,0.19-0.292,0.318c-0.165,0.127-0.47,0.419-0.712,0.47c-0.241,0.051-0.521,0.254-0.521,0.305c0,0.051,0.101,0.242,0.076,0.28c-0.025,0.038,0.05,0.229,0.191,0.28c0.139,0.05,0.381,0.038,0.393-0.039c0.014-0.076,0.204-0.241,0.217-0.127c0.013,0.115,0.14,0.292,0.114,0.368c-0.025,0.077,0,0.153,0.09,0.14c0.088-0.012,0.559-0.114,0.559-0.114s0.153-0.064,0.127-0.166c-0.026-0.101,0.166-0.241,0.203-0.279c0.038-0.038,0.178-0.191,0.014-0.241c-0.167-0.051-0.293-0.064-0.115-0.216s0.292,0,0.521-0.229c0.229-0.229-0.051-0.292,0.191-0.305c0.241-0.013,0.496-0.025,0.444,0.051c-0.05,0.076-0.342,0.242-0.508,0.318c-0.166,0.077-0.14,0.216-0.076,0.292c0.063,0.076,0.09,0.254,0.204,0.229c0.113-0.025,0.254-0.114,0.38-0.101c0.128,0.012,0.383-0.013,0.42-0.013c0.039,0,0.216,0.178,0.114,0.203c-0.101,0.025-0.229,0.013-0.445,0.025c-0.215,0.013-0.456,0.013-0.456,0.051c0,0.039,0.292,0.127,0.19,0.191c-0.102,0.063-0.203-0.013-0.331-0.026c-0.127-0.012-0.203,0.166-0.241,0.267c-0.039,0.102,0.063,0.28-0.127,0.216c-0.191-0.063-0.331-0.063-0.381-0.038c-0.051,0.025-0.203,0.076-0.331,0.114c-0.126,0.038-0.076-0.063-0.242-0.063c-0.164,0-0.164,0-0.164,0l-0.103,0.013c0,0-0.101-0.063-0.114-0.165c-0.013-0.102,0.05-0.216-0.013-0.241c-0.064-0.026-0.292,0.012-0.33,0.088c-0.038,0.076-0.077,0.216-0.026,0.28c0.052,0.063,0.204,0.19,0.064,0.152c-0.14-0.038-0.317-0.051-0.419,0.026c-0.101,0.076-0.279,0.241-0.279,0.241s-0.318,0.025-0.318,0.102c0,0.077,0,0.178-0.114,0.191c-0.115,0.013-0.268,0.05-0.42,0.076c-0.153,0.025-0.139,0.088-0.317,0.102s-0.204,0.089-0.038,0.114c0.165,0.025,0.418,0.127,0.431,0.241c0.014,0.114-0.013,0.242-0.076,0.356c-0.043,0.079-0.305,0.026-0.458,0.026c-0.152,0-0.456-0.051-0.584,0c-0.127,0.051-0.102,0.305-0.064,0.419c0.039,0.114-0.012,0.178-0.063,0.216c-0.051,0.038-0.065,0.152,0,0.204c0.063,0.051,0.114,0.165,0.166,0.178c0.051,0.013,0.215-0.038,0.279,0.025c0.064,0.064,0.127,0.216,0.165,0.178c0.039-0.038,0.089-0.203,0.153-0.166c0.064,0.039,0.216-0.012,0.331-0.025s0.177-0.14,0.292-0.204c0.114-0.063,0.05-0.063,0.013-0.14c-0.038-0.076,0.114-0.165,0.204-0.254c0.088-0.089,0.253-0.013,0.292-0.115c0.038-0.102,0.051-0.279,0.151-0.267c0.103,0.013,0.243,0.076,0.331,0.076c0.089,0,0.279-0.14,0.332-0.165c0.05-0.025,0.241-0.013,0.267,0.102c0.025,0.114,0.241,0.254,0.292,0.279c0.051,0.025,0.381,0.127,0.433,0.165c0.05,0.038,0.126,0.153,0.152,0.254c0.025,0.102,0.114,0.102,0.128,0.013c0.012-0.089-0.065-0.254,0.025-0.242c0.088,0.013,0.191-0.026,0.191-0.026s-0.243-0.165-0.331-0.203c-0.088-0.038-0.255-0.114-0.331-0.241c-0.076-0.127-0.267-0.153-0.254-0.279c0.013-0.127,0.191-0.051,0.292,0.051c0.102,0.102,0.356,0.241,0.445,0.33c0.088,0.089,0.229,0.127,0.267,0.242c0.039,0.114,0.152,0.241,0.19,0.292c0.038,0.051,0.165,0.331,0.204,0.394c0.038,0.063,0.165-0.012,0.229-0.063c0.063-0.051,0.179-0.076,0.191-0.178c0.013-0.102-0.153-0.178-0.203-0.216c-0.051-0.038,0.127-0.076,0.191-0.127c0.063-0.05,0.177-0.14,0.228-0.063c0.051,0.077,0.026,0.381,0.051,0.432c0.025,0.051,0.279,0.127,0.331,0.191c0.05,0.063,0.267,0.089,0.304,0.051c0.039-0.038,0.242,0.026,0.294,0.038c0.049,0.013,0.202-0.025,0.304-0.05c0.103-0.025,0.204-0.102,0.191,0.063c-0.013,0.165-0.051,0.419-0.179,0.546c-0.127,0.127-0.076,0.191-0.202,0.191c-0.06,0-0.113,0-0.156,0.021c-0.041-0.065-0.098-0.117-0.175-0.097c-0.152,0.038-0.344,0.038-0.47,0.19c-0.128,0.153-0.178,0.165-0.204,0.114c-0.025-0.051,0.369-0.267,0.317-0.331c-0.05-0.063-0.355-0.038-0.521-0.038c-0.166,0-0.305-0.102-0.433-0.127c-0.126-0.025-0.292,0.127-0.418,0.254c-0.128,0.127-0.216,0.038-0.331,0.038c-0.115,0-0.331-0.165-0.331-0.165s-0.216-0.089-0.305-0.089c-0.088,0-0.267-0.165-0.318-0.165c-0.05,0-0.19-0.115-0.088-0.166c0.101-0.05,0.202,0.051,0.101-0.229c-0.101-0.279-0.33-0.216-0.419-0.178c-0.088,0.039-0.724,0.025-0.775,0.025c-0.051,0-0.419,0.127-0.533,0.178c-0.116,0.051-0.318,0.115-0.369,0.14c-0.051,0.025-0.318-0.051-0.433,0.013c-0.151,0.084-0.291,0.216-0.33,0.216c-0.038,0-0.153,0.089-0.229,0.28c-0.077,0.19,0.013,0.355-0.128,0.419c-0.139,0.063-0.394,0.204-0.495,0.305c-0.102,0.101-0.229,0.458-0.355,0.623c-0.127,0.165,0,0.317,0.025,0.419c0.025,0.101,0.114,0.292-0.025,0.471c-0.14,0.178-0.127,0.266-0.191,0.279c-0.063,0.013,0.063,0.063,0.088,0.19c0.025,0.128-0.114,0.255,0.128,0.369c0.241,0.113,0.355,0.217,0.418,0.367c0.064,0.153,0.382,0.407,0.382,0.407s0.229,0.205,0.344,0.293c0.114,0.089,0.152,0.038,0.177-0.05c0.025-0.09,0.178-0.104,0.355-0.104c0.178,0,0.305,0.04,0.483,0.014c0.178-0.025,0.356-0.141,0.42-0.166c0.063-0.025,0.279-0.164,0.443-0.063c0.166,0.103,0.141,0.241,0.23,0.332c0.088,0.088,0.24,0.037,0.355-0.051c0.114-0.09,0.064-0.052,0.203,0.025c0.14,0.075,0.204,0.151,0.077,0.267c-0.128,0.113-0.051,0.293-0.128,0.47c-0.076,0.178-0.063,0.203,0.077,0.278c0.14,0.076,0.394,0.548,0.47,0.638c0.077,0.088-0.025,0.342,0.064,0.495c0.089,0.151,0.178,0.254,0.077,0.331c-0.103,0.075-0.28,0.216-0.292,0.47s0.051,0.431,0.102,0.521s0.177,0.331,0.241,0.419c0.064,0.089,0.14,0.305,0.152,0.445c0.013,0.14-0.024,0.306,0.039,0.381c0.064,0.076,0.102,0.191,0.216,0.292c0.115,0.103,0.152,0.318,0.152,0.318s0.039,0.089,0.051,0.229c0.012,0.14,0.025,0.228,0.152,0.292c0.126,0.063,0.215,0.076,0.28,0.013c0.063-0.063,0.381-0.077,0.546-0.063c0.165,0.013,0.355-0.075,0.521-0.19s0.407-0.419,0.496-0.508c0.089-0.09,0.292-0.255,0.268-0.356c-0.025-0.101-0.077-0.203,0.024-0.254c0.102-0.052,0.344-0.152,0.356-0.229c0.013-0.077-0.09-0.395-0.115-0.457c-0.024-0.064,0.064-0.18,0.165-0.306c0.103-0.128,0.421-0.216,0.471-0.267c0.051-0.053,0.191-0.267,0.217-0.433c0.024-0.167-0.051-0.369,0-0.457c0.05-0.09,0.013-0.165-0.103-0.268c-0.114-0.102-0.089-0.407-0.127-0.457c-0.037-0.051-0.013-0.319,0.063-0.345c0.076-0.023,0.242-0.279,0.344-0.393c0.102-0.114,0.394-0.47,0.534-0.496c0.139-0.025,0.355-0.229,0.368-0.343c0.013-0.115,0.38-0.547,0.394-0.635c0.013-0.09,0.166-0.42,0.102-0.497c-0.062-0.076-0.559,0.115-0.622,0.141c-0.064,0.025-0.241,0.127-0.446,0.113c-0.202-0.013-0.114-0.177-0.127-0.254c-0.012-0.076-0.228-0.368-0.279-0.381c-0.051-0.012-0.203-0.166-0.267-0.317c-0.063-0.153-0.152-0.343-0.254-0.458c-0.102-0.114-0.165-0.38-0.268-0.559c-0.101-0.178-0.189-0.407-0.279-0.572c-0.021-0.041-0.045-0.079-0.067-0.117c0.118-0.029,0.289-0.082,0.31-0.009c0.024,0.088,0.165,0.279,0.19,0.419s0.165,0.089,0.178,0.216c0.014,0.128,0.14,0.433,0.19,0.47c0.052,0.038,0.28,0.242,0.318,0.318c0.038,0.076,0.089,0.178,0.127,0.369c0.038,0.19,0.076,0.444,0.179,0.482c0.102,0.038,0.444-0.064,0.508-0.102s0.482-0.242,0.635-0.255c0.153-0.012,0.179-0.115,0.368-0.152c0.191-0.038,0.331-0.177,0.458-0.28c0.127-0.101,0.28-0.355,0.33-0.444c0.052-0.088,0.179-0.152,0.115-0.253c-0.063-0.103-0.331-0.254-0.433-0.268c-0.102-0.012-0.089-0.178-0.152-0.178s-0.051,0.088-0.178,0.153c-0.127,0.063-0.255,0.19-0.344,0.165s0.026-0.089-0.113-0.203s-0.192-0.14-0.192-0.228c0-0.089-0.278-0.255-0.304-0.382c-0.026-0.127,0.19-0.305,0.254-0.19c0.063,0.114,0.115,0.292,0.279,0.368c0.165,0.076,0.318,0.204,0.395,0.229c0.076,0.025,0.267-0.14,0.33-0.114c0.063,0.024,0.191,0.253,0.306,0.292c0.113,0.038,0.495,0.051,0.559,0.051s0.33,0.013,0.381-0.063c0.051-0.076,0.089-0.076,0.153-0.076c0.062,0,0.177,0.229,0.267,0.254c0.089,0.025,0.254,0.013,0.241,0.179c-0.012,0.164,0.076,0.305,0.165,0.317c0.09,0.012,0.293-0.191,0.293-0.191s0,0.318-0.012,0.433c-0.014,0.113,0.139,0.534,0.139,0.534s0.19,0.393,0.241,0.482s0.267,0.355,0.267,0.47c0,0.115,0.025,0.293,0.103,0.293c0.076,0,0.152-0.203,0.24-0.331c0.091-0.126,0.116-0.305,0.153-0.432c0.038-0.127,0.038-0.356,0.038-0.444c0-0.09,0.075-0.166,0.255-0.242c0.178-0.076,0.304-0.292,0.456-0.407c0.153-0.115,0.141-0.305,0.446-0.305c0.305,0,0.278,0,0.355-0.077c0.076-0.076,0.151-0.127,0.19,0.013c0.038,0.14,0.254,0.343,0.292,0.394c0.038,0.052,0.114,0.191,0.103,0.344c-0.013,0.152,0.012,0.33,0.075,0.33s0.191-0.216,0.191-0.216s0.279-0.189,0.267,0.013c-0.014,0.203,0.025,0.419,0.025,0.545c0,0.053,0.042,0.135,0.088,0.21c-0.005,0.059-0.004,0.119-0.009,0.178C27.388,17.153,27.387,17.327,27.436,17.39zM20.382,12.064c0.076,0.05,0.102,0.127,0.152,0.203c0.052,0.076,0.14,0.05,0.203,0.114c0.063,0.064-0.178,0.14-0.075,0.216c0.101,0.077,0.151,0.381,0.165,0.458c0.013,0.076-0.279,0.114-0.369,0.102c-0.089-0.013-0.354-0.102-0.445-0.127c-0.089-0.026-0.139-0.343-0.025-0.331c0.116,0.013,0.141-0.025,0.267-0.139c0.128-0.115-0.189-0.166-0.278-0.191c-0.089-0.025-0.268-0.305-0.331-0.394c-0.062-0.089-0.014-0.228,0.141-0.331c0.076-0.051,0.279,0.063,0.381,0c0.101-0.063,0.203-0.14,0.241-0.165c0.039-0.025,0.293,0.038,0.33,0.114c0.039,0.076,0.191,0.191,0.141,0.229c-0.052,0.038-0.281,0.076-0.356,0c-0.075-0.077-0.255,0.012-0.268,0.152C20.242,12.115,20.307,12.013,20.382,12.064zM16.875,12.28c-0.077-0.025,0.025-0.178,0.102-0.229c0.075-0.051,0.164-0.178,0.241-0.305c0.076-0.127,0.178-0.14,0.241-0.127c0.063,0.013,0.203,0.241,0.241,0.318c0.038,0.076,0.165-0.026,0.217-0.051c0.05-0.025,0.127-0.102,0.14-0.165s0.127-0.102,0.254-0.102s0.013,0.102-0.076,0.127c-0.09,0.025-0.038,0.077,0.113,0.127c0.153,0.051,0.293,0.191,0.459,0.279c0.165,0.089,0.19,0.267,0.088,0.292c-0.101,0.025-0.406,0.051-0.521,0.038c-0.114-0.013-0.254-0.127-0.419-0.153c-0.165-0.025-0.369-0.013-0.433,0.077s-0.292,0.05-0.395,0.05c-0.102,0-0.228,0.127-0.253,0.077C16.875,12.534,16.951,12.306,16.875,12.28zM17.307,9.458c0.063-0.178,0.419,0.038,0.355,0.127C17.599,9.675,17.264,9.579,17.307,9.458zM17.802,18.584c0.063,0.102-0.14,0.431-0.254,0.407c-0.113-0.027-0.076-0.318-0.038-0.382C17.548,18.545,17.769,18.529,17.802,18.584zM13.189,12.674c0.025-0.051-0.039-0.153-0.127-0.013C13.032,12.71,13.164,12.725,13.189,12.674zM20.813,8.035c0.141,0.076,0.339,0.107,0.433,0.013c0.076-0.076,0.013-0.204-0.05-0.216c-0.064-0.013-0.104-0.115,0.062-0.203c0.165-0.089,0.343-0.204,0.534-0.229c0.19-0.025,0.622-0.038,0.774,0c0.152,0.039,0.382-0.166,0.445-0.254s-0.203-0.152-0.279-0.051c-0.077,0.102-0.444,0.076-0.521,0.051c-0.076-0.025-0.686,0.102-0.812,0.102c-0.128,0-0.179,0.152-0.356,0.229c-0.179,0.076-0.42,0.191-0.509,0.229c-0.088,0.038-0.177,0.19-0.101,0.216C20.509,7.947,20.674,7.959,20.813,8.035zM14.142,12.674c0.064-0.089-0.051-0.217-0.114-0.217c-0.12,0-0.178,0.191-0.103,0.254C14.002,12.776,14.078,12.763,14.142,12.674zM14.714,13.017c0.064,0.025,0.114,0.102,0.165,0.114c0.052,0.013,0.217,0,0.167-0.127s-0.167-0.127-0.204-0.127c-0.038,0-0.203-0.038-0.267,0C14.528,12.905,14.65,12.992,14.714,13.017zM11.308,10.958c0.101,0.013,0.217-0.063,0.305-0.101c0.088-0.038,0.216-0.114,0.216-0.229c0-0.114-0.025-0.216-0.077-0.267c-0.051-0.051-0.14-0.064-0.216-0.051c-0.115,0.02-0.127,0.14-0.203,0.14c-0.076,0-0.165,0.025-0.14,0.114s0.077,0.152,0,0.19C11.117,10.793,11.205,10.946,11.308,10.958zM11.931,10.412c0.127,0.051,0.394,0.102,0.292,0.153c-0.102,0.051-0.28,0.19-0.305,0.267s0.216,0.153,0.216,0.153s-0.077,0.089-0.013,0.114c0.063,0.025,0.102-0.089,0.203-0.089c0.101,0,0.304,0.063,0.406,0.063c0.103,0,0.267-0.14,0.254-0.229c-0.013-0.089-0.14-0.229-0.254-0.28c-0.113-0.051-0.241-0.28-0.317-0.331c-0.076-0.051,0.076-0.178-0.013-0.267c-0.09-0.089-0.153-0.076-0.255-0.14c-0.102-0.063-0.191,0.013-0.254,0.089c-0.063,0.076-0.14-0.013-0.217,0.012c-0.102,0.035-0.063,0.166-0.012,0.229C11.714,10.221,11.804,10.361,11.931,10.412zM24.729,17.198c-0.083,0.037-0.153,0.47,0,0.521c0.152,0.052,0.241-0.202,0.191-0.267C24.868,17.39,24.843,17.147,24.729,17.198zM20.114,20.464c-0.159-0.045-0.177,0.166-0.304,0.306c-0.128,0.141-0.267,0.254-0.317,0.241c-0.052-0.013-0.331,0.089-0.242,0.279c0.089,0.191,0.076,0.382-0.013,0.472c-0.089,0.088,0.076,0.342,0.052,0.482c-0.026,0.139,0.037,0.229,0.215,0.229s0.242-0.064,0.318-0.229c0.076-0.166,0.088-0.331,0.164-0.47c0.077-0.141,0.141-0.434,0.179-0.51c0.038-0.075,0.114-0.316,0.102-0.457C20.254,20.669,20.204,20.489,20.114,20.464zM10.391,8.802c-0.069-0.06-0.229-0.102-0.306-0.11c-0.076-0.008-0.152,0.06-0.321,0.06c-0.168,0-0.279,0.067-0.347,0C9.349,8.684,9.068,8.65,9.042,8.692C9.008,8.749,8.941,8.751,9.008,8.87c0.069,0.118,0.12,0.186,0.179,0.178s0.262-0.017,0.288,0.051C9.5,9.167,9.569,9.226,9.712,9.184c0.145-0.042,0.263-0.068,0.296-0.119c0.033-0.051,0.263-0.059,0.263-0.059S10.458,8.861,10.391,8.802z'
+  // }));
+
+  // closeButtonContainer.events.on('click', function () {
+  //   popupContainer.hide();
+  // });
+
+  // popupContainer.show();
+}
+
