@@ -30,11 +30,13 @@ Tea.teaObjects = [];
 
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
-  const favoriteButton = document.getElementById(`${this.id}`);
-  const self = this;
-  favoriteButton.addEventListener('click', function () {
-    checkFavorites(self);
-  });
+  if (document.getElementById(`${this.id}`) {
+    const favoriteButton = document.getElementById(`${this.id}`);
+    const self = this;
+    favoriteButton.addEventListener('click', function () {
+      checkFavorites(self);
+    });
+  }
 };
 
 // create tea instances
@@ -59,7 +61,6 @@ function loadTeaObjects(storedTeaObjects) {
 function saveTeaObjects() {
   localStorage.removeItem(teaLocalStorageKey);
   const teaObjectsToStore = JSON.stringify(Tea.teaObjects);
-  console.log(teaObjectsToStore);
   localStorage.setItem(teaLocalStorageKey, teaObjectsToStore);
 }
 
@@ -67,7 +68,7 @@ function saveTeaObjects() {
 function initTeaObjects() {
   const storedTeaObjects = localStorage.getItem(teaLocalStorageKey);
   if (storedTeaObjects) {
-    loadTeaObjects();
+    loadTeaObjects(storedTeaObjects);
   } else {
     createTeaObjects();
   }
@@ -82,7 +83,7 @@ function checkFavorites(teaObject) {
   } else if (teaObject.favorite === true) {
     teaObject.favorite = false;
   }
-  // saveTeaObjects();
+  saveTeaObjects();
   updateFavorites();
 }
 
