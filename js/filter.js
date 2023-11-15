@@ -13,7 +13,7 @@ switch (teaType) {
 
  case "White Tea":
  message += "<h2>White Tea</h2><p>White tea is made from the young buds and immature tea leaves that are covered in small white hairs, which were picked shortly before the buds have fully opened. Straight after harvesting, the young, unfurled leaves aren't rolled but are immediately fired to minimise oxidation, giving white tea one of the most light and delicate flavors out of all the tea varieties. <p>White tea has the lowest caffeine content of all the teas because it's the least processed tea with the shortest oxidation time.</p>";
- imgWhite.style.display = "block";
+ //imgWhite.style.display = "block";
  break;
  
  case "Yellow Tea":
@@ -21,8 +21,7 @@ switch (teaType) {
 break;
  
 case "Green Tea":
- message += "<h2>Prerequisite(s): Math &142 or placement test." + "</br>" + "</br>" + "You need to take more Math classes." + 
- "</br>" + "Next class to take: Math &152 - Calculus II.</h2>";
+ message += "<h2>Green Tea</h2><p>Green tea is heated for a short time after harvesting, so it undergoes a short oxidation process and keeps its green color. As this tea is allowed to oxidise slightly, it still contains caffeine, although not as much as black tea. </p";
  break;
  
  default:
