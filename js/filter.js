@@ -20,9 +20,9 @@ switch (teaType) {
  message += "<h2>Yellow Tea</h2><p>Yellow tea is produced in a similar way to green tea but has an additional step to lock in its distinctive yellow color. After being withered, rolled, and going through a quick oxidation process, the leaves are dried using steam instead of hot air. This turns the tea yellow and gives it a slightly lighter, more mellow taste than green tea.</p>";
 break;
  
-case "Math &151":
- message += "<p>Prerequisite(s): Math &142 or placement test." + "</br>" + "</br>" + "You need to take more Math classes." + 
- "</br>" + "Next class to take: Math &152 - Calculus II.</p>";
+case "Green Tea":
+ message += "<h2>Prerequisite(s): Math &142 or placement test." + "</br>" + "</br>" + "You need to take more Math classes." + 
+ "</br>" + "Next class to take: Math &152 - Calculus II.</h2>";
  break;
  
  default:
