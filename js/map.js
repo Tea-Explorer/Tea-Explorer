@@ -186,48 +186,54 @@ let cities = [
     latitude: 35.0116, longitude: 135.768326,
     imagePath: 'img/assets/greentea.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }, {
     title: 'London',
     latitude: 51.5072, longitude: -0.1276,
     imagePath: 'img/assets/Earl-Grey-tea.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }, {
     title: 'Los Angeles',
     latitude: 34.0549, longitude: -118.2426,
     imagePath: 'img/assets/Chamomile.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }, {
     title: 'Buenos Aires',
     latitude: -34.6037, longitude: -58.3816,
     imagePath: 'img/assets/yerba-mate-tea.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }, {
     title: 'Cape Town', latitude: -33.9249,
     longitude: 18.4241,
     imagePath: 'img/assets/South-African-Rooibos-tea.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }, {
     title: 'Sydney',
     latitude: -33.8688, longitude: 151.2093,
     imagePath: 'img/assets/Australian-Lemon-Myrtle-Tea.jpg',
     about: 'ABOUT',
-    link: 'link'
+    link: 'link',
+    id: 'green'
   }
 ];
 
 // Loops through and pushes all cities into addCity function
 for (let i = 0; i < cities.length; i++) {
   let city = cities[i];
-  addCity(city.longitude, city.latitude, city.title, city.imagePath, city.about, city.link);
+  addCity(city.longitude, city.latitude, city.title, city.imagePath, city.about, city.link, city.id);
 }
 
 // Adds city data into locations.data
-function addCity(long, lat, title, path, about, link) {
+function addCity(long, lat, title, path, about, link, id) {
   locations.data.push({
     geometry: {
       type: 'Point',
@@ -236,7 +242,8 @@ function addCity(long, lat, title, path, about, link) {
     title: title,
     src: path,
     about: about,
-    link: link
+    link: link,
+    id: id
   });
 }
 
@@ -264,6 +271,7 @@ function handlePopup(target) {
   favoriteDiv.setAttribute('id', 'fav');
   let heart = document.createElement('img');
   heart.src = 'img/assets/heart.svg';
+  heart.setAttribute('id', target.id);
   let fav = document.createElement('p');
   fav.textContent = 'ADD TO FAVORITES';
   favoriteDiv.append(heart);
