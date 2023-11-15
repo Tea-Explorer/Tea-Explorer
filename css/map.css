@@ -3,6 +3,10 @@ body {
   height: 100vh;
 }
 
+main {
+  height: 70vh;
+}
+
 #mapContainer {
     margin: auto;
     width: 80%;
@@ -12,10 +16,10 @@ body {
 
 #popUp {
   position: absolute;
-  width: 33%;
-  height: 33%;
-  top: 33%;
-  left: 33%;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
   background-color: white;
   z-index: 999;
   display: grid;
@@ -35,7 +39,10 @@ body {
   margin: auto;
   display: flex;
   justify-content: center;
+}
 
+.heart {
+  fill: blue;
 }
 
 #popUp>h2 {
