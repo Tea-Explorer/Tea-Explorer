@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tea Explorer</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
-  <link rel="stylesheet" type="text/css" href="css/home.css">
-  <header class="one-two-header">
+  <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/events.css" -->
+<script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.ie11.min.js"></script>
+
+  <header>
     <div class="one-two-leftheader">
       <img src="img/assets/tea-explorer.png" alt="team-logo" width="100" height="100" />
       <div>
@@ -26,7 +29,11 @@
   </header>
 </head>
 <body>
-  
+
+  <div id="calendar" style="height: 700px;width: 1400px;">
+  </div>
+
+
 </body>
 <footer>
   <section class="copyright">
@@ -34,5 +41,5 @@
   </section>
 </footer>
 
-<script src="js/app.js"></script>
+<script src="js/events.js"></script>
 </html>
