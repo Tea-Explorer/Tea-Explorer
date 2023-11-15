@@ -140,8 +140,3 @@ body.dark-mode {
   background-color: #333;
   color: #01010f;
 }
-
-.section {
-  margin-bottom: 20px; /* Adjust as needed */
-  border-bottom: 1px solid #ccc; /* Optional border between sections */
-}
