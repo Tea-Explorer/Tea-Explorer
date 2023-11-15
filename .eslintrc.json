@@ -12,12 +12,12 @@
     "node": true
   },
   "rules": {
-  //  "no-var": "error",
+  "no-var": "error",
     "eqeqeq": ["error", "always"],
     "no-console": "off",
     "no-undefined": "off",
-  //  "indent": ["error", 2],
-  //"quotes": ["warn", "single"],
+  "indent": ["error", 2],
+  "quotes": ["warn", "single"],
     "no-multi-spaces": [
       "warn",
       {
@@ -26,7 +26,7 @@
         }
       }
     ],
-  //  "no-trailing-spaces": "warn",
+    "no-trailing-spaces": "warn",
     "new-cap": "warn",
     "no-redeclare": [
       "error",
