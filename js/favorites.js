@@ -13,6 +13,8 @@ const teaDataList = [
   ['Lemon Myrtle Tea', 'Herbal', 'Australian-Lemon-Myrtle-Tea.jpg', '#', 'lemon']
 ];
 
+////// Tea objects //////
+
 // Tea constructor function
 function Tea(name, type, imgFile, link, id, favorite = false) {
   this.name = name;
@@ -25,7 +27,12 @@ function Tea(name, type, imgFile, link, id, favorite = false) {
 Tea.teaObjects = [];
 
 // Tea object methods
-
+Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
+  const favoriteButton = document.querySelector(`#${this.id}`);
+  favoriteButton.addEventListener('click', function () {
+    checkFavoritesList(this);
+  });
+};
 
 // create tea instances
 function createTeaObjects() {
@@ -58,6 +65,29 @@ function initTeaObjects() {
   } else {
     createTeaObjects();
   }
+}
+
+////// Favorites List //////
+
+// check if a tea is favorite'd to add to or remove from the favorites list
+function checkFavoritesList(teaObject) {
+  if (teaObject.favorite === false) {
+    teaObject.favorite = true;
+    addToFavoritesList(teaObject);
+  } else if (teaObject.favorite === true) {
+    teaObject.favorite = false;
+    removeFromFavoritesList(teaObject);
+  }
+}
+
+// add tea to favorites list
+function addToFavoritesList(teaObject) {
+
+}
+
+// remove tea from favorites list
+function removeFromFavoritesList(teaObject) {
+
 }
 
 // run app
