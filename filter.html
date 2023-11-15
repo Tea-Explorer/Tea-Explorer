@@ -7,21 +7,36 @@
     <link rel="stylesheet" href="css/filter.css">
 </head>
 <body>
-    <div id="mainContainer">
     <header>
 
     </header>
 
     <nav>
         <ul>
-            <li>Home</li>
-           <li>Want to know about tea types?</li>
+            <li><a href="">Home</a></li>
+
+            <li>Want to learn more about tea types?<br>
+
+            <p>Select a tea type</p>
+            <select id="selectTea" onchange="filterTea()">
+                <option>
+                <option value="White Tea">White Tea</option>
+                <option value="Yellow Tea">Yellow Tea</option>
+                <option value="Green Tea">Green Tea</option>
+                <option value="Oolong Tea">Oolong Tea</option>
+                <option value="Black Tea">Black Tea</option>
+               </select>
+        
+           </li>
+
         </ul>
 
+            
     </nav>
 
-    <main>
+    <div id="mainPlusAside">
 
+    <main>
     <h2><strong>What is Tea</strong></h2>
     Tea is an aromatic beverage which can be prepared by pouring hot or boiling water over cured or fresh leaves of <i>Camellia sinensis</i>, an evergreen shrub native to East Asia.Today, tea is grown all around the world. Tea has a stimulating effect in humans due to its caffeine content. Tea leaves are processed differently to attain varying degrees of oxidation, thereby producing different tea types, with black tea being the most oxidized and green being the least oxidized.
     <p>After the tea leaves have been picked, they go through four different processes. The way these processes are carried out determines what type of tea the tea leaves will become: <br>
@@ -38,10 +53,26 @@
         <img src="img/assets/topWorldTeaProducers.PNG" alt="Top World Tea Producing Countries">
     <d/iv>
 
-   
+   </div>
+
+    
+
     </main>
 
+   </div>
 
-    </div> 
+    <aside>
+        <div id="output">
+
+
+        </div>
+        <p>This is a test of the aside</p>
+
+
+
+    </aside>
+
+
+    <script src="js/filter.js"></script>
 </body>
 </html>
