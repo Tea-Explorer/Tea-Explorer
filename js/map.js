@@ -1,15 +1,5 @@
 'use strict';
 
-// Continent codes for color use mainly
-const continents = {
-  'AF': 0,
-  'AN': 1,
-  'AS': 2,
-  'EU': 3,
-  'NA': 4,
-  'OC': 5,
-  'SA': 6
-};
 
 // Sets root location for map.
 let mapContainer = am5.Root.new('mapContainer');
@@ -249,7 +239,8 @@ function addCity(long, lat, title, path, about, link) {
 
 function handlePopup(target) {
   console.log(target);
-  let map = document.getElementById('innerContainer');
+  let map = document.getElementById('mapContainer');
+  let inner = document.getElementById('innerContainer');
   let popup = document.createElement('div');
   popup.setAttribute('id', 'popUp');
 
@@ -295,9 +286,11 @@ function handlePopup(target) {
 
   close.addEventListener('click', function() {
     popup.remove();
+    map.style.opacity = '1';
   });
 
-  map.append(popup);
-
+  inner.append(popup);
+  map.style.opacity = '0.5';
+  inner.style.opacity= '1';
 }
 
