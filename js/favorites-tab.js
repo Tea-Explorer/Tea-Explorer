@@ -7,8 +7,8 @@ const favoritesTabList = document.querySelector('#favoritesList');
 // [name[0], type[1], imgFile[2], link[3], ID[4]]
 const teaDataList = [
   ['Japanese Green Tea', 'Green', 'greentea.jpg', '#', 'green'],
-  ['Earl Grey Tea', 'Black', 'earl-grey-tea.jpg', '#', 'earl'],
-  ['Chamomile Tea', 'Herbal', 'chamomile.jpg', '#', 'chamomile'],
+  ['Earl Grey Tea', 'Black', 'Earl-Grey-tea.jpg', '#', 'earl'],
+  ['Chamomile Tea', 'Herbal', 'Chamomile.jpg', '#', 'chamomile'],
   ['Yerba Mate', 'Herbal', 'yerba-mate-tea.jpg', '#', 'yerba'],
   ['South African Rooibos', 'Herbal', 'South-African-Rooibos-tea.jpg', '#', 'rooibos'],
   ['Australian Lemon Myrtle Tea', 'Herbal', 'Australian-Lemon-Myrtle-Tea.jpg', '#', 'lemon']
@@ -17,10 +17,10 @@ const teaDataList = [
 ////// Tea Objects //////
 
 // Tea constructor function
-function Tea(name, type, imgFile, link, id, favorite = false) {
+function Tea(name, type, imgSrc, link, id, favorite = false) {
   this.name = name;
   this.type = type;
-  this.imgSrc = `img/assets/${imgFile}`;
+  this.imgSrc = imgSrc;
   this.link = link;
   this.id = id;
   this.favorite = favorite;
@@ -42,7 +42,7 @@ Tea.prototype.favoriteButtonListener = function () { // favorite button click ev
 // create tea instances
 function createTeaObjects() {
   for (const teaData of teaDataList) {
-    const currentTea = new Tea(teaData[0], teaData[1], teaData[2], teaData[3], teaData[4]);
+    const currentTea = new Tea(teaData[0], teaData[1], `img/assets/${teaData[2]}`, teaData[3], teaData[4]);
     Tea.teaObjects.push(currentTea);
   }
 }
@@ -52,7 +52,7 @@ function loadTeaObjects(storedTeaObjects) {
   const TeaObjects = JSON.parse(storedTeaObjects);
 
   for (const TeaObject of TeaObjects) {
-    const currentTeaObject = new Tea(TeaObject.name, TeaObject.type, TeaObject.imgFile, TeaObject.link, TeaObject.id, TeaObject.favorite);
+    const currentTeaObject = new Tea(TeaObject.name, TeaObject.type, TeaObject.imgSrc, TeaObject.link, TeaObject.id, TeaObject.favorite);
     Tea.teaObjects.push(currentTeaObject);
   }
 }
