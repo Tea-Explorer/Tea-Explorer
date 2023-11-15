@@ -6,6 +6,10 @@ main {
   width: 80vw;
 }
 
+i {
+  color: #D9A486
+}
+
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #C9A88D;
