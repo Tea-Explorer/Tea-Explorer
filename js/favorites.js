@@ -93,7 +93,8 @@ function addToFavoritesList(teaObject) {
 
 // remove tea from favorites list
 function removeFromFavoritesList(teaObject) {
-
+  const listItem = document.getElementById(`${teaObject.id}-list`);
+  favoritesList.removeChild(listItem);
 }
 
 // run app
