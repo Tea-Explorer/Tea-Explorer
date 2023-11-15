@@ -1,0 +1,15 @@
+#body {
+  display: flex;
+}
+
+main {
+  width: 80vw;
+}
+
+#manageFavorites {
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #C9A88D;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
