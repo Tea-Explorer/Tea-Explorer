@@ -1,3 +1,7 @@
+i:hover {
+  cursor: pointer;
+}
+
 #favoritesTab {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #F2EBE1;
@@ -19,11 +23,19 @@
   font-weight: 600;
   font-size: 1.5rem;
   background-color: #C16632;
-  color: #FAF9F8;
   height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#favoritesTab a {
+  color: #FAF9F8;
+  text-decoration: none;
+}
+
+#favoritesTab a:hover {
+  text-decoration: underline;
 }
 
 #favoritesList {
