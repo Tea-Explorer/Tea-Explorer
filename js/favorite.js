@@ -6,8 +6,11 @@ const manageFavoritesList = document.getElementById('manageFavoritesList');
 
 // create list of favorite teas in manage favorites
 function renderManageFavoritesList() {
+  manageFavoritesList.innerHTML = '';
+
   for (const teaObject of Tea.teaObjects) {
     if (teaObject.favorite) {
+      // container for image and description
       const teaItem = document.createElement('div');
       manageFavoritesList.appendChild(teaItem);
       teaItem.classList.add('manageFavoritesListItem');
@@ -15,18 +18,21 @@ function renderManageFavoritesList() {
       const teaImage = document.createElement('img');
       teaItem.appendChild(teaImage);
       teaImage.setAttribute('src', `${teaObject.imgSrc}`);
-      console.log(teaObject.imgSrc);
+      // container for tea description
+      const teaDescription = document.createElement('div');
+      teaItem.appendChild(teaDescription);
+      teaDescription.classList.add('manageFavoritesListItemDescription');
       // name
       const teaName = document.createElement('dt');
-      teaItem.appendChild(teaName);
+      teaDescription.appendChild(teaName);
       teaName.textContent = teaObject.name;
       // type
       const teaType = document.createElement('dd');
-      teaItem.appendChild(teaType);
+      teaDescription.appendChild(teaType);
       teaType.textContent = `Type: ${teaObject.type}`;
       // link
       const teaLink = document.createElement('dd');
-      teaItem.appendChild(teaLink);
+      teaDescription.appendChild(teaLink);
       const teaAnchor = document.createElement('a');
       teaLink.appendChild(teaAnchor);
       teaAnchor.textContent = 'Learn More';
@@ -35,5 +41,17 @@ function renderManageFavoritesList() {
   }
 }
 
+// listen for favorite button changes on page to update manage favorites list
+function updateManageFavoritesList() {
+  for (const teaObject of Tea.teaObjects) {
+    const favoriteButton = document.getElementById(teaObject.id);
+    if (favoriteButton) {
+      favoriteButton.addEventListener('click', renderManageFavoritesList);
+    }
+  }
+}
+
+
 // run app
 renderManageFavoritesList();
+updateManageFavoritesList();

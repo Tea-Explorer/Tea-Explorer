@@ -10,10 +10,37 @@ i {
   color: #D9A486
 }
 
+/* manage favorites list */
+
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #C9A88D;
   width: 30vw;
   display: flex;
   flex-direction: column;
+}
+
+.manageFavoritesListItem {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.manageFavoritesListItem img {
+  width: 50%;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+  background-color: #E1D0BC;
+  border: .1rem solid #1A1A1A;
+}
+
+.manageFavoritesListItemDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 50%;
 }
