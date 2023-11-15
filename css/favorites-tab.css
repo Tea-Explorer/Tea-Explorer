@@ -12,7 +12,7 @@ i:hover {
   right: 5vw;
   display: flex;
   flex-direction: column;
-  transition: all 350ms ease;
+  transition: all 450ms ease;
 }
 
 #favoritesTab:hover {
@@ -43,8 +43,7 @@ i:hover {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem 1rem;
   gap: 1rem;
 }
