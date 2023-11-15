@@ -1,3 +1,37 @@
-header{
-    background-color: red;
+#gridPage{
+    display: grid;
+    grid-template-columns: [first] 1400px [line2] auto;
+}
+
+#calendar{
+    height: 700px;
+    width:1400px;
+    margin-top: 20px;
+    margin-left: 10px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+ul{
+    background-color: #C16632;
+    width: 400px;
+    grid-column-start: 2;
+    height: 700px;
+    margin-top: 20px;
+    padding-top:10px;
+}
+li{
+padding-bottom: 50px;
+padding-top: 50px;
+}
+a{
+    text-decoration: none;
+    font-size:16px;
+    color: #FBEDDB;
+}
+a:hover{
+    font-size:18px;
+}
+
+a:visited{
+    color: #FBEDDB;
 }
