@@ -1,23 +1,73 @@
 body {
   position: relative;
+  height: 100vh;
 }
 
 #mapContainer {
     margin: auto;
-    width: 50%;
+    width: 80%;
     height: 50vh;
+    background-color: #e1d0bc;
   }
 
 #popUp {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 25%;
-  left: 25%;
-  background-color: blue;
+  width: 33%;
+  height: 33%;
+  top: 33%;
+  left: 33%;
+  background-color: white;
   z-index: 999;
+  display: grid;
+  display: grid;
+  grid-template-columns: 0.75fr 1fr 0.05fr;
+  grid-template-rows: 0.75fr 1fr repeat(2, 0.5fr);
+  grid-column-gap: 1rem;
+  grid-row-gap: 0px;
+  border-radius: 30px;
+  padding: 2rem;
+  font-size: 1vw;
+}
+
+#popUp>img {
+  grid-area: 1 / 1 / 5 / 2;
+  border-radius: 20px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+
+}
+
+#popUp>h2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+#popUp>p {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+#fav {
+  grid-area: 3 / 2 / 4 / 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#link {
+  grid-area: 4 / 2 / 5 / 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#popUp button {
+  grid-area: 1 / 3 / 2 / 4;
+  aspect-ratio: 1 / 1;
+  border-radius: 5px;
 }
 
 .hoverContainer {
-  background-color: blue;  
+  background-color: white;  
+  border-radius: 10px;
+  padding: 1vw;
 }
