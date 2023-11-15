@@ -140,3 +140,19 @@ body.dark-mode {
   background-color: #333;
   color: #01010f;
 }
+
+#header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+#cartIcon {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#teaImages img {
+  margin: 5px;
+}
