@@ -12,12 +12,14 @@ main{
     width: 800px;
     float: left;
     border: 3px solid #73AD21;
+    padding: 10px;
 }
 
 aside{
-    width: 405px;
+    width: 365px;
     float: right;
     border: 3px solid #73AD21;
+    padding: 10px;
 
 }
 
@@ -26,6 +28,14 @@ img{
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
+}
+
+#imgWhiteTea{
+    display: none;
+}
+
+#imgNav{
+    float: left;
 }
 
 nav{
@@ -59,4 +69,13 @@ main{
 
 h2{
     border-top: 20px;
+}
+
+ footer{
+    position: static;
+    width: 100%;
+    text-align: center;
+    display: block;
+    clear: both;
+    padding: 20px;
 }

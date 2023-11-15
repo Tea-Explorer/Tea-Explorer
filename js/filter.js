@@ -1,20 +1,19 @@
 
 
-// eslint-disable-next-line no-unused-vars
 function filterTea(){
 let teaType = document.getElementById("selectTea").value;
-let message = "<p>You selected " + teaType + ".</p>";
+let imgWhite = document.getElementById("imgWhiteTea");
+let message = "";
 
 switch (teaType) {
 
  case "White Tea":
- message += "<h2>white tea</h2><p>Prerequisite(s): Math 085 or Math 097 or placement." + "</br>" + "</br>" + "You need to take more Math classes." + 
- "</br>" + "Next class to take: Math &141 - Precalculus I.</p>";
+ message += "<h2>White Tea</h2><p>White tea is made from the young buds and immature tea leaves that are covered in small white hairs, which were picked shortly before the buds have fully opened. Straight after harvesting, the young, unfurled leaves aren't rolled but are immediately fired to minimise oxidation, giving white tea one of the most light and delicate flavors out of all the tea varieties. <p>White tea has the lowest caffeine content of all the teas because it's the least processed tea with the shortest oxidation time.</p>";
+ imgWhite.style.display = "block";
  break;
 
  case "Math &141":
- message += "<p>Prerequisite(s): Math 098 or placement." + "</br>" + "</br>" + "You need to take more Math classes." + 
- "</br>" + "Next class to take: Math &142 - Precalculus II.</p>";
+ message += "<p>Prerequisite(s): Math 098 or placement." + "</br>" + "<</p>";
  break;
  
  case "Math &142":
@@ -55,10 +54,20 @@ case "Math 224":
 case "Math 238":
  message += "<p>Prerequisite(s): Math &152 or higher or instructor permission." + "</br>" + "Math &163 strongly recommended." + "</br>" + 
  "</br>" + "Next class to take: Math 211 (Elements of Statistical Methods), Math 220 (Linear Algebra) and Math 224 (Vector Calculus) in any order to complete the 200-level Math classes.</p>";
- break; 
+ break;
+ 
+ default:
+
  }
 
 document.getElementById("output").innerHTML = message;
 }
 
 
+
+// eslint-disable-next-line no-unused-vars
+function resetImage(){
+    // eslint-disable-next-line no-undef
+    document.getElementById("selectTea").value = teaType;
+
+}
