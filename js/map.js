@@ -33,7 +33,7 @@ world.mapPolygons.template.setAll({
 
 // Upon hover over specific world state, set target to color in color.getIndex(N)
 world.mapPolygons.template.states.create('hover', {
-  fill: colors.getIndex(2)
+  fill: am5.color(0x9e552b)
 });
 
 // 
@@ -56,7 +56,7 @@ world.mapPolygons.template.events.on('click', (e) => {
     });
 
     province.show();
-    world.hide(100);
+    world.hide();
     backButtonContainer.show();
   });
 });
@@ -181,18 +181,43 @@ locations.bullets.push(function () {
 
 // List of cities and their coordinates. Copied because obviously.
 let cities = [
-  { 
+  {
     title: 'Kyoto',
     latitude: 35.0116, longitude: 135.768326,
     imagePath: 'img/assets/greentea.jpg',
     about: 'ABOUT',
     link: 'link'
-  },
-  { title: "London", latitude: 51.5072, longitude: -0.1276, imagePath: 'img/assets/Earl-Grey-tea.jpg', about: 'ABOUT', link: 'link'},
-  { title: "Los Angeles", latitude: 34.0549, longitude: -118.2426, imagePath: 'img/assets/Chamomile.jpg', about: 'ABOUT', link: 'link' },
-  { title: "Buenos Aires", latitude: -34.6037, longitude: -58.3816, imagePath: 'img/assets/yerba-mate-tea.jpg', about: 'ABOUT', link: 'link' },
-  { title: "Cape Town", latitude: -33.9249, longitude: 18.4241, imagePath: 'img/assets/South-African-Rooibos-tea.jpg', about: 'ABOUT', link: 'link' },
-  { title: "Sydney", latitude: -33.8688, longitude: 151.2093, imagePath: 'img/assets/Australian-Lemon-Myrtle-Tea.jpg', about: 'ABOUT', link: 'link' }
+  }, {
+    title: 'London',
+    latitude: 51.5072, longitude: -0.1276,
+    imagePath: 'img/assets/Earl-Grey-tea.jpg',
+    about: 'ABOUT',
+    link: 'link'
+  }, {
+    title: 'Los Angeles',
+    latitude: 34.0549, longitude: -118.2426,
+    imagePath: 'img/assets/Chamomile.jpg',
+    about: 'ABOUT',
+    link: 'link'
+  }, {
+    title: 'Buenos Aires',
+    latitude: -34.6037, longitude: -58.3816,
+    imagePath: 'img/assets/yerba-mate-tea.jpg',
+    about: 'ABOUT',
+    link: 'link'
+  }, {
+    title: 'Cape Town', latitude: -33.9249,
+    longitude: 18.4241,
+    imagePath: 'img/assets/South-African-Rooibos-tea.jpg',
+    about: 'ABOUT',
+    link: 'link'
+  }, {
+    title: 'Sydney',
+    latitude: -33.8688, longitude: 151.2093,
+    imagePath: 'img/assets/Australian-Lemon-Myrtle-Tea.jpg',
+    about: 'ABOUT',
+    link: 'link'
+  }
 ];
 
 // Loops through and pushes all cities into addCity function
@@ -215,28 +240,6 @@ function addCity(long, lat, title, path, about, link) {
   });
 }
 
-// let modal = am5.Modal.new(mapContainer, {
-//   content: ""
-// });
-
-
-// function openModal() {
-//   if (!modalSetup) {
-//     let closeButton = document.createElement('input');
-//     closeButton.type = 'button';
-//     closeButton.setAttribute('id', 'closeButton');
-//     closeButton.value = 'X';
-//     closeButton.addEventListener('click', function () {
-//       modal.dispose();
-//     });
-
-//     modal.getPrivate('content').appendChild(closeButton);
-
-//     modalSetup = true;
-//   }
-//   modal.open();
-// }
-
 function handlePopup(target) {
   console.log(target);
   let map = document.getElementById('mapContainer');
@@ -245,7 +248,7 @@ function handlePopup(target) {
   popup.setAttribute('id', 'popUp');
 
   let img = document.createElement('img');
-
+  img.setAttribute('id', 'hero');
   img.src = target.src;
   popup.append(img);
 
@@ -255,42 +258,45 @@ function handlePopup(target) {
 
   let about = document.createElement('p');
   about.textContent = target.about;
+  popup.append(about);
 
   let favoriteDiv = document.createElement('div');
+  favoriteDiv.setAttribute('id', 'fav');
   let heart = document.createElement('img');
+  heart.src = 'img/assets/heart.svg';
   let fav = document.createElement('p');
   fav.textContent = 'ADD TO FAVORITES';
   favoriteDiv.append(heart);
   favoriteDiv.append(fav);
   popup.append(favoriteDiv);
 
-  let linkDiv = document.createElement('div');
+  let link = document.createElement('a');
+  link.setAttribute('id', 'link');
+  link.href = target.link;
+  link.setAttribute('target', '_blank');
+
   let linkImg = document.createElement('img');
+  linkImg.src = 'img/assets/link.svg';
   let linkMsg = document.createElement('p');
   linkMsg.textContent = 'Purchase Tea';
 
-  let link = document.createElement('a');
-  let msg = document.createTextNode('[Link to Seller]');
-  link.appendChild(msg);
-  link.href = target.link;
-  link.setAttribute('target', '_blank');
-  link.title = '[Link to Seller]';
-  linkMsg.append(link);
-
-  linkDiv.append(linkImg);
-  linkDiv.append(link);
-  popup.append(linkDiv);
+  link.append(linkImg);
+  link.append(linkMsg);
+  popup.append(link);
 
   let close = document.createElement('button');
+  close.textContent = '\u2573';
   popup.append(close);
 
   close.addEventListener('click', function() {
     popup.remove();
     map.style.opacity = '1';
+    map.style['pointer-events'] = 'auto';
   });
 
   inner.append(popup);
   map.style.opacity = '0.5';
+  map.style['pointer-events'] = 'none';
   inner.style.opacity= '1';
 }
 
