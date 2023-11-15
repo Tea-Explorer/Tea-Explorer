@@ -1,6 +1,7 @@
 'use strict';
 
 const teaLocalStorageKey = 'tea-key';
+const favoritesList = document.querySelector('#favoritesList');
 
 // tea data
 // [name[0], type[1], imgFile[2], link[3], ID[4]]
@@ -23,14 +24,16 @@ function Tea(name, type, imgFile, link, id, favorite = false) {
   this.link = link;
   this.id = id;
   this.favorite = favorite;
+  this.favoriteButtonListener = this.favoriteButtonListener();
 }
 Tea.teaObjects = [];
 
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
-  const favoriteButton = document.querySelector(`#${this.id}`);
+  const favoriteButton = document.getElementById(`${this.id}`);
+  const self = this;
   favoriteButton.addEventListener('click', function () {
-    checkFavoritesList(this);
+    checkFavoritesList(self);
   });
 };
 
@@ -82,7 +85,10 @@ function checkFavoritesList(teaObject) {
 
 // add tea to favorites list
 function addToFavoritesList(teaObject) {
-
+  const listItem = document.createElement('li');
+  favoritesList.appendChild(listItem);
+  listItem.textContent = teaObject.name;
+  listItem.setAttribute('id', `${teaObject.id}-list`);
 }
 
 // remove tea from favorites list
