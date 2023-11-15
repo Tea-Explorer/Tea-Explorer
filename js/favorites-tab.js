@@ -31,11 +31,8 @@ Tea.teaObjects = [];
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
   const favoriteButton = document.getElementById(`${this.id}`);
-  const self = this;
-  favoriteButton.addEventListener('click', function () {
-    checkFavorites(self);
-  });
-};
+  favoriteButton.addEventListener('click', updateFavorites);
+}
 
 // create tea instances
 function createTeaObjects() {
@@ -73,15 +70,14 @@ function initTeaObjects() {
 ////// Favorites List //////
 
 // check if a tea is favorite'd to add to or remove from the favorites list
-function checkFavorites(teaObject) {
-  if (teaObject.favorite === false) {
-    teaObject.favorite = true;
-    updateFavorites();
-  } else if (teaObject.favorite === true) {
-    teaObject.favorite = false;
-    updateFavorites();
-  }
-}
+// function checkFavorites(teaObject) {
+//   if (teaObject.favorite === false) {
+//     teaObject.favorite = true;
+//     updateFavorites();
+//   } else if (teaObject.favorite === true) {
+//     teaObject.favorite = false;
+//     updateFavorites();
+//   }
 
 // add tea to favorites list
 // function addToFavorites(teaObject) {
@@ -99,21 +95,32 @@ function checkFavorites(teaObject) {
 
 // update favorites tab list and favorites button
 function updateFavorites() {
+  favoritesTabList.innerHTML = '';
+
   for (const teaObject of Tea.teaObjects) {
-    if (teaObject.favorite === true) {
+    const favoriteButton = document.getElementById(`${teaObject.id}`);
+
+    if (teaObject.favorite === false) {
+      teaObject.favorite === true;
       // add to favorite tab list
       const tabListItem = document.createElement('li');
       favoritesTabList.appendChild(tabListItem);
       tabListItem.textContent = teaObject.name;
       tabListItem.setAttribute('id', `${teaObject.id}-tab-list`);
+      // update favorite button to solid
+      // favoriteButton.classList.remove('fa-regular');
+      // favoriteButton.classList.add('fa-solid');
+      favoriteButton.classList.replace('fa-regular', 'fa-solid');
 
-      // update favorite button
-      // const favoriteButton = document.getElementById(`${teaObject.id}`);
-      // favoriteButton.rem
-
-    } else if (teaObject.favorite === false) {
+    } else if (teaObject.favorite === true) {
+      teaObject.favorite = false;
+      // add to favorite tab list
       const tabListItem = document.getElementById(`${teaObject.id}-tab-list`);
       favoritesTabList.removeChild(tabListItem);
+      // update favorite button to outline
+      // favoriteButton.classList.remove('fa-solid');
+      // favoriteButton.classList.add('fa-regular');
+      favoriteButton.classList.replace('fa-solid', 'fa-regular');
     }
   }
 }
