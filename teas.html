@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learn More About Types of Tea</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
-  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link rel="stylesheet" type="text/css" href="css/learnmore.css">
   <link rel="stylesheet" href="css/favorites-tab.css">
   <link rel="stylesheet" href="css/favorite.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,15 +29,19 @@
         <a href="index.html" alt="Map page link">EXPLORE , </a>
         <a href="events.html" alt="Homepage Link"> EVENTS , </a> 
         <a href="favorite.html" alt="favorite link">FAVORITE, </a>
-        <a href="teas.html" alt="Homepage Link">LEARN-MORE, </a>
+        <a href="teas.html" alt="Homepage Link">LEARN-MORE & PURCHASE, </a>
         <a href="about-us.html" alt="About us link"> ABOUT </a>
       </section>
     </nav>
   </header>
-  <h1 style="font-size: 45px;">Learn More About Types of Tea: </h1>
-  <div class="button-container">
-    <button id="toggle-mode" class="highlight">Dark Mode</button>
-  </div><br><br>
+  <div class="button-container">  
+  <label for="colorInput">Set page background color:</label>
+  <input type="text" id="colorInput" placeholder="Enter a color (name or html code)">
+  <button onclick="changePageColor()">Change Color</button>
+  <button id="toggle-mode" class="highlight">Dark Mode</button><br><br>
+  <h1 style="font-size: 35px;">Learn More About Varieties of Tea: </h1>
+  </div>
+  
   <section id="allTeas">
   <h2>Our Teas:</h2>
   <ul>
@@ -67,6 +71,7 @@
     </li>
   </ul>
 </section>
+
 <section id="recommendations">
   <div class="location-info">
     <h1>Feature Tea: Japanese Green Tea</h1><br><br>
@@ -200,6 +205,29 @@
   <p>Join us in Sydney to experience the delightful flavor and wellness benefits of our premium Australian Lemon Myrtle Tea blend.</p>
 </div><br><br>
 
+<h1 style="font-size: 35px;">Purchase our Signature Teas: </h1>
+<nav>
+  <label for="nameInput">Enter your name:</label>
+<input type="text" id="nameInput" placeholder="Your name">
+<button onclick="updateGreeting()">Submit Name</button>
+<p id="greeting"></p>
+<h1>🍵🌿🫖☕️</h1>
+<div id="header">
+  <div id="cartIcon" onclick="showShoppingCart()"> Shopping Cart ☕️(0)</div>
+</div>
+<section id="tea">
+<h2>Amounts of tea:</h2>
+<label for="teaInput">Enter the number of the tea you want:</label>
+<input type="number" id="teaInput" placeholder="Enter a number">
+<button onclick="displayTeaImages()">Show teas</button>
+<div id="teaImages"><br>
+</div><br>
+<p>After adding tea to shopping cart, click on shopping cart item(s) to confirm amounts</p>
+<button id="confirmButton">Confirm</button>
+</section>
+<script src="app.js"></script>
+</nav>
+
   <footer>
     <section class="copyright">
       <p style="font-weight: bold; font-size: 18px;">© 2023 Tea Explorer</p>
@@ -212,6 +240,6 @@
   <div id="add-manually"><a href="#">Add Your Own</a></div>
 </menu>
 <script src="js/favorites-tab.js"></script>
-<script src="js/home.js"></script>
+<script src="js/learnmore.js"></script>
 </body>
 </html>
