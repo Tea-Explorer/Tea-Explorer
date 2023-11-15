@@ -6,12 +6,13 @@
   <title>Tea Explorer</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link rel="stylesheet" href="css/favorites-tab.css">
+  <link rel="stylesheet" href="css/map.css">
   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/geodata/data/countries2.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-  <link rel="stylesheet" href="css/map.css">
 </head>
 <body>
   <header class="one-two-header">
@@ -32,9 +33,17 @@
       </section>
     </nav>
   </header>
-  <div id="mapContainer">
-  </div>
-  <div id="innerContainer"></div>
+  <main>
+    <div id="mapContainer">
+    </div>
+    <div id="innerContainer"></div>
+    <menu id="favoritesTab">
+      <h2><a href="favorite.html">Favorites</a></h2>
+      <ul id="favoritesList"></ul>
+      <div id="add-manually"><a href="#">Add Your Own</a></div>
+    </menu>
+  </main>
+  
   
 </body>
 <footer>
@@ -44,4 +53,5 @@
 </footer>
 
 <script src="js/map.js"></script>
+<script src="js/favorites-tab.js"></script>
 </html>
