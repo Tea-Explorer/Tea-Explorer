@@ -14,7 +14,7 @@ const teaDataList = [
   ['Australian Lemon Myrtle Tea', 'Herbal', 'Australian-Lemon-Myrtle-Tea.jpg', '#', 'lemon']
 ];
 
-////// Tea objects //////
+////// Tea Objects //////
 
 // Tea constructor function
 function Tea(name, type, imgFile, link, id, favorite = false) {
@@ -48,6 +48,7 @@ function createTeaObjects() {
 // load tea objects from local storage
 function loadTeaObjects(storedTeaObjects) {
   const TeaObjects = JSON.parse(storedTeaObjects);
+
   for (const TeaObject of TeaObjects) {
     const currentTeaObject = new Tea(TeaObject.name, TeaObject.type, TeaObject.imgFile, TeaObject.link, TeaObject.id, TeaObject.favorite);
     Tea.teaObjects.push(currentTeaObject);
@@ -55,9 +56,11 @@ function loadTeaObjects(storedTeaObjects) {
 }
 
 // Save tea objects to local storage
-function saveTeaObjects() { //eslint-disable-line
+function saveTeaObjects() {
   localStorage.removeItem(teaLocalStorageKey);
-  localStorage.setItem(teaLocalStorageKey, JSON.stringify(Tea.teaObjects));
+  const teaObjectsToStore = JSON.stringify(Tea.teaObjects);
+  console.log(teaObjectsToStore);
+  localStorage.setItem(teaLocalStorageKey, teaObjectsToStore);
 }
 
 // initialize tea objects from local storage or create them
@@ -70,7 +73,7 @@ function initTeaObjects() {
   }
 }
 
-////// Favorites List //////
+////// Favorites Tab List //////
 
 // check if a tea is favorite'd to add to or remove from the favorites list
 function checkFavorites(teaObject) {
@@ -79,22 +82,9 @@ function checkFavorites(teaObject) {
   } else if (teaObject.favorite === true) {
     teaObject.favorite = false;
   }
+  // saveTeaObjects();
   updateFavorites();
 }
-
-// add tea to favorites list
-// function addToFavorites(teaObject) {
-//   const tabListItem = document.createElement('li');
-//   favoritesTabList.appendChild(tabListItem);
-//   tabListItem.textContent = teaObject.name;
-//   tabListItem.setAttribute('id', `${teaObject.id}-tab-list`);
-// }
-
-// remove tea from favorites list
-// function removeFromFavorites(teaObject) {
-//   const tabListItem = document.getElementById(`${teaObject.id}-tab-list`);
-//   favoritesTabList.removeChild(tabListItem);
-// }
 
 // update favorites tab list and favorites button
 function updateFavorites() {
