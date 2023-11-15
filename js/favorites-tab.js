@@ -31,8 +31,11 @@ Tea.teaObjects = [];
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
   const favoriteButton = document.getElementById(`${this.id}`);
-  favoriteButton.addEventListener('click', updateFavorites);
-}
+  const self = this;
+  favoriteButton.addEventListener('click', function () {
+    checkFavorites(self);
+  });
+};
 
 // create tea instances
 function createTeaObjects() {
@@ -70,14 +73,14 @@ function initTeaObjects() {
 ////// Favorites List //////
 
 // check if a tea is favorite'd to add to or remove from the favorites list
-// function checkFavorites(teaObject) {
-//   if (teaObject.favorite === false) {
-//     teaObject.favorite = true;
-//     updateFavorites();
-//   } else if (teaObject.favorite === true) {
-//     teaObject.favorite = false;
-//     updateFavorites();
-//   }
+function checkFavorites(teaObject) {
+  if (teaObject.favorite === false) {
+    teaObject.favorite = true;
+  } else if (teaObject.favorite === true) {
+    teaObject.favorite = false;
+  }
+  updateFavorites();
+}
 
 // add tea to favorites list
 // function addToFavorites(teaObject) {
@@ -95,32 +98,26 @@ function initTeaObjects() {
 
 // update favorites tab list and favorites button
 function updateFavorites() {
-  favoritesTabList.innerHTML = '';
+  favoritesTabList.innerHTML = ''; // reset favorite tab list
 
   for (const teaObject of Tea.teaObjects) {
     const favoriteButton = document.getElementById(`${teaObject.id}`);
 
-    if (teaObject.favorite === false) {
-      teaObject.favorite === true;
+    if (teaObject.favorite === true) {
       // add to favorite tab list
       const tabListItem = document.createElement('li');
       favoritesTabList.appendChild(tabListItem);
       tabListItem.textContent = teaObject.name;
-      tabListItem.setAttribute('id', `${teaObject.id}-tab-list`);
       // update favorite button to solid
-      // favoriteButton.classList.remove('fa-regular');
-      // favoriteButton.classList.add('fa-solid');
-      favoriteButton.classList.replace('fa-regular', 'fa-solid');
+      if (favoriteButton.classList.contains('fa-heart')) {
+        favoriteButton.classList.replace('fa-regular', 'fa-solid');
+      }
 
-    } else if (teaObject.favorite === true) {
-      teaObject.favorite = false;
-      // add to favorite tab list
-      const tabListItem = document.getElementById(`${teaObject.id}-tab-list`);
-      favoritesTabList.removeChild(tabListItem);
+    } else if (teaObject.favorite === false) {
       // update favorite button to outline
-      // favoriteButton.classList.remove('fa-solid');
-      // favoriteButton.classList.add('fa-regular');
-      favoriteButton.classList.replace('fa-solid', 'fa-regular');
+      if (favoriteButton.classList.contains('fa-heart')) {
+        favoriteButton.classList.replace('fa-solid', 'fa-regular');
+      }
     }
   }
 }
