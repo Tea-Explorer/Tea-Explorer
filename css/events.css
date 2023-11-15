@@ -1,3 +1,7 @@
+.toastui-calendar-section-button {
+    display: none;
+}
+
 #gridPage{
     display: grid;
     grid-template-columns: [first] 1400px [line2] auto;
@@ -35,3 +39,4 @@ a:hover{
 a:visited{
     color: #FBEDDB;
 }
+
