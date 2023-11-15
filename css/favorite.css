@@ -13,7 +13,7 @@ i {
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #C9A88D;
-  width: 20vw;
+  width: 30vw;
   display: flex;
   flex-direction: column;
 }
