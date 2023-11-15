@@ -1,8 +1,22 @@
+body {
+  position: relative;
+}
+
 #mapContainer {
     margin: auto;
     width: 50%;
     height: 50vh;
   }
+
+#popUp {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  background-color: blue;
+  z-index: 999;
+}
 
 .hoverContainer {
   background-color: blue;  
