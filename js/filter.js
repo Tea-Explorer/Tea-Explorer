@@ -9,7 +9,7 @@ switch (teaType) {
 
  case "White Tea":
  message += "<h2>White Tea</h2><p>White tea is made from the young buds and immature tea leaves that are covered in small white hairs, which were picked shortly before the buds have fully opened. Straight after harvesting, the young, unfurled leaves aren't rolled but are immediately fired to minimise oxidation, giving white tea one of the most light and delicate flavors out of all the tea varieties. <p>White tea has the lowest caffeine content of all the teas because it's the least processed tea with the shortest oxidation time.</p>";
- imgWhite.style.display = "block";
+ imgWhite.style.display = "block"; resetImage();
  break;
 
  case "Math &141":
