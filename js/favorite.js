@@ -8,7 +8,7 @@ const manageFavoritesList = document.getElementById('manageFavoritesList');
 function renderManageFavoritesList() {
   manageFavoritesList.innerHTML = '';
 
-  for (const teaObject of Tea.teaObjects) {
+  for (const teaObject of Tea.teaObjects) { // eslint-disable-line
     if (teaObject.favorite) {
       // container for image and description
       const teaItem = document.createElement('div');
@@ -37,13 +37,19 @@ function renderManageFavoritesList() {
       teaLink.appendChild(teaAnchor);
       teaAnchor.textContent = 'Learn More';
       teaAnchor.setAttribute('href', `${teaObject.link}`);
+      // remove from favorites button
+      const teaRemove = document.createElement('i');
+      teaDescription.appendChild(teaRemove);
+      teaRemove.classList.add('fa-heart-circle-xmark');
+      teaRemove.classList.add('fa-solid');
+      teaRemove.classList.add('fa-xl');
     }
   }
 }
 
 // listen for favorite button changes on page to update manage favorites list
 function updateManageFavoritesList() {
-  for (const teaObject of Tea.teaObjects) {
+  for (const teaObject of Tea.teaObjects) { // eslint-disable-line
     const favoriteButton = document.getElementById(teaObject.id);
     if (favoriteButton) {
       favoriteButton.addEventListener('click', renderManageFavoritesList);
