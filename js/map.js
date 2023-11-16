@@ -10,6 +10,7 @@ mapContainer.setThemes([
 ]);
 
 // Creates map.
+// Sets min/max zoom level.
 let map = mapContainer.container.children.push(am5map.MapChart.new(mapContainer, {
   panX: 'rotateX',
   projection: am5map.geoMercator(),
@@ -17,12 +18,15 @@ let map = mapContainer.container.children.push(am5map.MapChart.new(mapContainer,
   maxZoomLevel: 8
 }));
 
+
+
 // Says world, but really just contains countries within the world
 let world = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
   geoJSON: am5geodata_worldLow,
   exclude: ['AQ']
 }));
 
+// Goes to home view upon world data load
 world.events.on('datavalidated', function() {
   map.goHome();
 });
@@ -41,7 +45,7 @@ world.mapPolygons.template.states.create('hover', {
   fill: am5.color(0x9e552b)
 });
 
-// 
+// Sets world polygons to zoom in upon being clicked.
 world.mapPolygons.template.events.on('click', (e) => {
   let dataItem = e.target.dataItem;
   let data = dataItem.dataContext;
