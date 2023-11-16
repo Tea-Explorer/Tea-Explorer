@@ -43,12 +43,15 @@ function renderManageFavoritesList() {
       teaRemove.classList.add('fa-heart-circle-xmark');
       teaRemove.classList.add('fa-solid');
       teaRemove.classList.add('fa-xl');
+      teaRemove.setAttribute('id', `remove-${teaObject.id}`);
     }
   }
+
+  removeFavoritesListener();
 }
 
-// listen for favorite button changes on page to update manage favorites list
-function updateManageFavoritesList() {
+// listen for favorite button changes in "Our Favorites"
+function ourFavoritesListener() {
   for (const teaObject of Tea.teaObjects) { // eslint-disable-line
     const favoriteButton = document.getElementById(teaObject.id);
     if (favoriteButton) {
@@ -57,7 +60,25 @@ function updateManageFavoritesList() {
   }
 }
 
+// listen for remove favorite button clicks in "Manage Favorites"
+function removeFavoritesListener() {
+  for (const teaObject of Tea.teaObjects) { // eslint-disable-line
+    const removeFavoriteButton = document.getElementById(`remove-${teaObject.id}`);
+    if (removeFavoriteButton) {
+      const teaObjectToRemove = teaObject;
+      removeFavoriteButton.addEventListener('click', function () {
+        removeFavorite(teaObjectToRemove);
+      });
+    }
+  }
+}
+
+// update favorites when remove favorite button is clicked
+function removeFavorite(teaObjectToRemove) {
+  checkFavorites(teaObjectToRemove); // eslint-disable-line
+  renderManageFavoritesList();
+}
 
 // run app
 renderManageFavoritesList();
-updateManageFavoritesList();
+ourFavoritesListener();

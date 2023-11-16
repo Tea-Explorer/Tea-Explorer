@@ -14,8 +14,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
     rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e73ad52303.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/e73ad52303.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
   <header>
     <div id="logoContainer">
@@ -24,7 +25,7 @@
     </div>
     <nav>
       <a href="index.html" alt="Map page link" data-page="index">EXPLORE</a>
-      <a href="events.html" alt="Homepage Link" data-page="events"> EVENTS</a> 
+      <a href="events.html" alt="Homepage Link" data-page="events"> EVENTS</a>
       <a href="favorite.html" alt="favorite link" data-page="favorite">FAVORITES</a>
       <a href="teas.html" alt="Homepage Link" data-page="teas">LEARN MORE</a>
       <a href="filter.html" data-page="filter">CATEGORIES</a>
@@ -32,44 +33,53 @@
     </nav>
   </header>
   <main>
-    <section id="our-favorite-teas">
-      <h2>Our Favorite Teas:</h2>
-      <ul id="our-favorite-teas-list">
-        <li>
-          Japanese Green Tea
-          <i class="fa-regular fa-heart fa-lg" id="green"></i>
-        </li>
-        <li>
-          Earl Grey Tea
-          <i class="fa-regular fa-heart fa-lg" id="earl"></i>
-        </li>
-        <li>
-          Chamomile Tea
-          <i class="fa-regular fa-heart fa-lg" id="chamomile"></i>
-        </li>
-        <li>
-          Yerba Mate
-          <i class="fa-regular fa-heart fa-lg" id="yerba"></i>
-        </li>
-        <li>
-          South African Rooibos
-          <i class="fa-regular fa-heart fa-lg" id="rooibos"></i>
-        </li>
-        <li>
-          Australian Lemon Myrtle Tea
-          <i class="fa-regular fa-heart fa-lg" id="lemon"></i>
-        </li>
-      </ul>
-    </section>
-    <section id="recommendations">
-
-    </section>
+    <div id="recommendations">
+      <section id="our-favorite-teas">
+        <div>
+          <h2>Our Favorites</h2>
+          <span>Add our favorites to your favorites by clicking the <i class="fa-regular fa-heart fa-sm"></i></span>
+        </div>
+        <ul id="our-favorite-teas-list">
+          <li>
+            Japanese Green Tea
+            <i class="fa-regular fa-heart fa-lg" id="green"></i>
+          </li>
+          <li>
+            Earl Grey Tea
+            <i class="fa-regular fa-heart fa-lg" id="earl"></i>
+          </li>
+          <li>
+            Chamomile Tea
+            <i class="fa-regular fa-heart fa-lg" id="chamomile"></i>
+          </li>
+          <li>
+            Yerba Mate
+            <i class="fa-regular fa-heart fa-lg" id="yerba"></i>
+          </li>
+          <li>
+            South African Rooibos
+            <i class="fa-regular fa-heart fa-lg" id="rooibos"></i>
+          </li>
+          <li>
+            Australian Lemon Myrtle Tea
+            <i class="fa-regular fa-heart fa-lg" id="lemon"></i>
+          </li>
+        </ul>
+      </section>
+      <section id="tea-advisor">
+        <h2>STILL STEEPING*: Tea Advisor</h2>
+        <p>*Coming Soon - Get tea recommendations based on your preferences</p>
+        <div>
+          <i class="fa-solid fa-mug-hot fa-2xl"></i>
+        </div>
+      </section>
+    </div>
+    <aside id="manageFavorites">
+      <h2>Manage Favorites</h2>
+      <dl id="manageFavoritesList"></dl>
+      <div id="add-manually"><a href="#">Add Your Own</a></div>
+    </aside>
   </main>
-  <aside id="manageFavorites">
-    <h2>Manage Favorites</h2>
-    <dl id="manageFavoritesList"></dl>
-    <div id="add-manually"><a href="#">Add Your Own</a></div>
-  </aside>
 
   <!-- favorites tab, needs "favorites-tab.js" and "favorites-tab.css" to work -->
   <menu id="favoritesTab">
@@ -78,6 +88,7 @@
     <div id="manage-favorites"><a href="favorite.html">Manage Favorites</a></div>
   </menu>
   <!-- favorites tab -->
+
   <script src="js/app.js"></script>
   <script src="js/favorites-tab.js"></script>
   <script src="js/favorite.js"></script>

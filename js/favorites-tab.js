@@ -6,12 +6,12 @@ const favoritesTabList = document.querySelector('#favoritesList');
 // tea data
 // [name[0], type[1], imgFile[2], link[3], ID[4]]
 const teaDataList = [
-  ['Japanese Green Tea', 'Green', 'greentea.jpg', '#', 'green'],
-  ['Earl Grey Tea', 'Black', 'Earl-Grey-tea.jpg', '#', 'earl'],
-  ['Chamomile Tea', 'Herbal', 'Chamomile.jpg', '#', 'chamomile'],
-  ['Yerba Mate', 'Herbal', 'yerba-mate-tea.jpg', '#', 'yerba'],
-  ['South African Rooibos', 'Herbal', 'South-African-Rooibos-tea.jpg', '#', 'rooibos'],
-  ['Australian Lemon Myrtle Tea', 'Herbal', 'Australian-Lemon-Myrtle-Tea.jpg', '#', 'lemon']
+  ['Japanese Green Tea', 'Green', 'greentea.jpg', 'teas.html#greenTea', 'green'],
+  ['Earl Grey Tea', 'Black', 'Earl-Grey-tea.jpg', 'teas.html#earlTea', 'earl'],
+  ['Chamomile Tea', 'Herbal', 'Chamomile.jpg', 'teas.html#chamomileTea', 'chamomile'],
+  ['Yerba Mate', 'Herbal', 'yerba-mate-tea.jpg', 'teas.html#yerbaTea', 'yerba'],
+  ['South African Rooibos', 'Herbal', 'South-African-Rooibos-tea.jpg', 'teas.html#rooibosTea', 'rooibos'],
+  ['Australian Lemon Myrtle Tea', 'Herbal', 'Australian-Lemon-Myrtle-Tea.jpg', 'teas.html#lemonTea', 'lemon']
 ];
 
 ////// Tea Objects //////
@@ -30,7 +30,6 @@ Tea.teaObjects = [];
 
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
-  
   const favoriteButton = document.getElementById(`${this.id}`);
   if (favoriteButton) {
     const self = this;
