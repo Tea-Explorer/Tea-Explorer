@@ -15,6 +15,7 @@
     grid-column-start: 1;
     grid-column-end: 2;
     font-weight: 800;
+
 }
 ul{
     height: 50vh;
@@ -28,8 +29,8 @@ ul{
     list-style-type: none;
 }
 li{
-padding-top: 50px;
-text-decoration: none;
+    padding-top: 50px;
+    text-decoration: none;
 }
 #eventInfo a{
     text-decoration: none;
@@ -61,11 +62,11 @@ text-decoration: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     list-style-type: none;
     align-items: center;
-  }
-  #eventInfo:hover {
+}
+#eventInfo:hover {
     bottom: 0;
-  }
-  #eventInfo h2 {
+}
+#eventInfo h2 {
     font-family: 'Josefin Sans', sans-serif, monospace;
     letter-spacing: 0.2rem;
     font-weight: 600;
@@ -77,5 +78,9 @@ text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
+.toastui-calendar-event-detail-popup-slot .toastui-calendar-detail-item, .toastui-calendar-event-detail-popup-slot .toastui-calendar-content{
+    color: black;
+    font-weight: 400;
+}
