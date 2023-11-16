@@ -1,9 +1,11 @@
-#body {
-  display: flex;
-}
+/* main content between header and footer */
 
 main {
-  width: 80vw;
+  width: 90vw;
+  height: 75vh;
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5vh 5vw;
 }
 
 i {
@@ -11,12 +13,69 @@ i {
   color: #D9A486
 }
 
+/* recommendations */
+
+#recommendations {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* our favorite teas */
+
+#our-favorite-teas {
+  width: 65vw;
+  height: 10vh;
+  background-color: #E1D0BC;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+#our-favorite-teas div {
+  height: 4vh;
+  background-color: #656D4F;
+  color: #FAF9F8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#our-favorite-teas h2 {
+  font-family: 'Josefin Sans', sans-serif, monospace;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+}
+
+#our-favorite-teas span {
+  font-style: italic;
+  font-weight: 300;
+}
+
+#our-favorite-teas-list {
+  height: 6vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* recommended teas */
+
+#recommended-teas {
+  width: 65vw;
+  height: 60vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 /* manage favorites list */
 
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #C9A88D;
-  width: 30vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 20vw;
   display: flex;
   flex-direction: column;
 }
@@ -24,9 +83,16 @@ i {
 #manageFavorites h2 {
   background-color: #656D4F;
   color: #FAF9F8;
+  font-family: 'Josefin Sans', sans-serif, monospace;
+  letter-spacing: 0.2rem;
   font-size: 1.5rem;
   font-weight: 600;
+  text-align: center;
   padding: 1rem;
+}
+
+#manageFavoritesList {
+  overflow-y: auto;
 }
 
 .manageFavoritesListItem {
@@ -49,7 +115,7 @@ i {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
   width: 50%;
 }
 
@@ -62,6 +128,7 @@ i {
   font-size: 1.5rem;
   font-weight: 500;
   font-style: italic;
+  text-align: center;
   padding: .5rem;
 }
 
