@@ -21,9 +21,13 @@ switch (teaType) {
 break;
  
 case "Green Tea":
- message += "<h2>Green Tea</h2><p>Green tea is heated for a short time after harvesting, so it undergoes a short oxidation process and keeps its green color. As this tea is allowed to oxidise slightly, it still contains caffeine, although not as much as black tea. </p";
+ message += "<h2>Green Tea</h2><p>Green tea is heated for a short time after harvesting, so it undergoes a short oxidation process and keeps its green color. As this tea is allowed to oxidise slightly, it still contains caffeine, although not as much as black tea. Green tea is usually green, yellow or light brown when brewed.</p";
  break;
  
+ case "Oolong Tea":
+ message += "<h2>Oolong Tea</h2><p>Oolong tea is partially oxidized and the degree of oxidation can range from slightly oxidized to very oxidized (but not fully oxidized). The depth of character of oolong tea depends on the degree of oxidation, so an oolong can end up being closer to a green tea, or a black tea, depending on how it is produced.</p";
+ break;
+
  default:
 
  }

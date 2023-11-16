@@ -1,5 +1,5 @@
 body{
-    width: 80%;
+    width: 100%;
     margin: auto;
     background-color: antiquewhite;
     /*border: 3px solid #73AD21;
@@ -9,15 +9,17 @@ body{
 }
 
 main{
-    width: 800px;
+    /*width: 800px; */
+    width: 67%;
     float: left;
     border: 3px solid #73AD21;
     padding: 10px;
 }
 
 aside{
-    width: 365px;
-    float: right;
+    /*width: 365px; */
+    width: 28%;
+    float: right; 
     border: 3px solid #73AD21;
     padding: 10px;
 
