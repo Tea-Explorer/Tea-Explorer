@@ -137,7 +137,3 @@ function displayTeaImages() {
   }
 }
 
-function showError(element, message) {
-  alert(message);
-}
-
