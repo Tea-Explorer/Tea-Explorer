@@ -1,18 +1,15 @@
-i:hover {
-  cursor: pointer;
-}
-
 #favoritesTab {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #F2EBE1;
   width: 15vw;
   height: 60vh;
   position: fixed;
+  z-index: 100;
   bottom: -55vh;
   right: 5vw;
   display: flex;
   flex-direction: column;
-  transition: all 350ms ease;
+  transition: all 450ms ease;
 }
 
 #favoritesTab:hover {
@@ -23,19 +20,11 @@ i:hover {
   font-weight: 600;
   font-size: 1.5rem;
   background-color: #C16632;
+  color: #FAF9F8;
   height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#favoritesTab a {
-  color: #FAF9F8;
-  text-decoration: none;
-}
-
-#favoritesTab a:hover {
-  text-decoration: underline;
 }
 
 #favoritesList {
@@ -43,13 +32,12 @@ i:hover {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem 1rem;
   gap: 1rem;
 }
 
-#add-manually {
+#manage-favorites {
   font-weight: 600;
   font-style: italic;
   background-color: #B59275;
@@ -59,12 +47,12 @@ i:hover {
   align-items: center;
 }
 
-#add-manually a {
+#manage-favorites a {
   color: #FAF9F8;
   text-decoration: none;
 }
 
-#add-manually a:hover {
+#manage-favorites a:hover {
   text-decoration: underline;
   font-style: normal;
 }
