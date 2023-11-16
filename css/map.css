@@ -3,16 +3,19 @@ body {
   height: 100vh;
 }
 
-main {
-  height: 73.8vh;
+main h2 {
+  margin: 3vh auto 3vh 3vh;
+  font-size: larger;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
 }
 
 #mapContainer {
     width: 70%;
     height: 70%;
-    background-color: #e1d0bc;
     margin: auto;
-  }
+    background-color: #e1d0bc;
+}
 
 #popUp {
   position: absolute;
@@ -22,7 +25,6 @@ main {
   left: 30%;
   background-color: white;
   z-index: 999;
-  display: grid;
   display: grid;
   grid-template-columns: 0.75fr 1fr 0.05fr;
   grid-template-rows: 0.75fr 1fr repeat(2, 0.5fr);
@@ -126,7 +128,7 @@ main {
 }
 
 .hoverContainer {
-  background-color: white;  
+  background-color: #F2EBE1;  
   border-radius: 10px;
   padding: 1vw;
   border: solid 5px rgb(184, 93, 41);

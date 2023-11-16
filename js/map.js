@@ -17,6 +17,8 @@ let map = mapContainer.container.children.push(am5map.MapChart.new(mapContainer,
   maxZoomLevel: 8
 }));
 
+
+
 // Says world, but really just contains countries within the world
 let world = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
   geoJSON: am5geodata_worldLow,
