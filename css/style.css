@@ -58,6 +58,10 @@ main {
     color: black;
 }
 
+#topHeader nav a:hover {
+    transform: translateY(1px);
+}
+
 .active {
     font-weight: 800;
 }
