@@ -1,0 +1,52 @@
+main {
+  display: flex;
+  justify-content: space-evenly;
+  height: 80vh;
+}
+
+/* mission */
+
+#mission {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+  text-align: justify;
+  gap: 2rem;
+  padding: 3rem;
+  background-color: #E1D0BC;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#mission h2 {
+  font-family: 'Josefin Sans', sans-serif, monospace;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.3rem;
+}
+
+#mission p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2rem;
+}
+
+#mission a {
+  color: inherit;
+  font-style: italic;
+}
+
+/* logos */
+
+#logos {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  height: 50%;
+  object-fit: contain;
+}
