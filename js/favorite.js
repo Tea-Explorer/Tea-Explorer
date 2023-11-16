@@ -75,7 +75,7 @@ function removeFavoritesListener() {
 
 // update favorites when remove favorite button is clicked
 function removeFavorite(teaObjectToRemove) {
-  checkFavorites(teaObjectToRemove);
+  checkFavorites(teaObjectToRemove); // eslint-disable-line
   renderManageFavoritesList();
 }
 
