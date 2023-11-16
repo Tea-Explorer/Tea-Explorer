@@ -8,7 +8,6 @@
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/learnmore.css">
   <link rel="stylesheet" href="css/favorites-tab.css">
-  <link rel="stylesheet" href="css/favorite.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -40,35 +39,38 @@
     <h1 style="font-size: 35px;">Learn More About Varieties of Tea: </h1>
   </div>
   
-  <section id="allTeas">
-  <h2>Our Teas(Click on hearts to add to favorite):</h2><br>
-  <ul>
-    <li>
-      Japanese Green Tea
-      <i class="fa-regular fa-heart" id="green"></i>
-    </li>
-    <li>
-      Earl Grey Tea
-      <i class="fa-regular fa-heart" id="earl"></i>
-    </li>
-    <li>
-      Chamomile Tea
-      <i class="fa-regular fa-heart" id="chamomile"></i>
-    </li>
-    <li>
-      Yerba Mate
-      <i class="fa-regular fa-heart" id="yerba"></i>
-    </li>
-    <li>
-      South African Rooibos
-      <i class="fa-regular fa-heart" id="rooibos"></i>
-    </li>
-    <li>
-      Australian Lemon Myrtle Tea
-      <i class="fa-regular fa-heart" id="lemon"></i>
-    </li>
-  </ul>
-</section>
+  <section id="our-favorite-teas">
+    <h2>Our Teas(Click on hearts to add to favorite):</h2>
+    <ul>
+      <li>
+        Japanese Green Tea
+        <i class="fa-regular fa-heart" id="green"></i>
+      </li>
+      <li>
+        Earl Grey Tea
+        <i class="fa-regular fa-heart" id="earl"></i>
+      </li>
+      <li>
+        Chamomile Tea
+        <i class="fa-regular fa-heart" id="chamomile"></i>
+      </li>
+      <li>
+        Yerba Mate
+        <i class="fa-regular fa-heart" id="yerba"></i>
+      </li>
+      <li>
+        South African Rooibos
+        <i class="fa-regular fa-heart" id="rooibos"></i>
+      </li>
+      <li>
+        Australian Lemon Myrtle Tea
+        <i class="fa-regular fa-heart" id="lemon"></i>
+      </li>
+    </ul>
+  </section>
+  
+<br>
+<br>
 
 <section id="recommendations">
   <div class="location-info" id="greenTea"> 
@@ -238,12 +240,12 @@
   </footer>
 
   <menu id="favoritesTab">
-    <h2><a href="favorite.html">Favorites</a></h2>
+    <h2>Favorites</h2>
     <ul id="favoritesList"></ul>
-    <div id="add-manually"><a href="#">Add Your Own</a></div>
-  </menu>
+    <div id="manage-favorites"><a href="favorite.html">Manage Favorites</a></div>
+  </menu> 
 
-  <script src="app.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/favorites-tab.js"></script>
   <script src="js/learnmore.js"></script>
 </body>
