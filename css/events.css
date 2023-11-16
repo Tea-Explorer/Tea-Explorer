@@ -28,20 +28,19 @@ ul{
     list-style-type: none;
 }
 li{
-padding-bottom: 50px;
 padding-top: 50px;
 text-decoration: none;
 }
-a{
+#eventInfo a{
     text-decoration: none;
     font-size:16px;
     color: black;
 }
-a:hover{
+#eventInfo a:hover{
     font-size:18px;
 }
 
-a:visited{
+#eventInfo a:visited{
     color: #FBEDDB;
     color: black;
 }
