@@ -1,6 +1,11 @@
 body {
   position: relative;
   height: 100vh;
+  justify-content: center;
+}
+
+main * {
+  justify-content: center;
 }
 
 main h2 {
