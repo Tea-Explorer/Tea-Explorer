@@ -25,7 +25,7 @@ i {
 
 #our-favorite-teas {
   width: 65vw;
-  height: 10vh;
+  height: 20vh;
   background-color: #E1D0BC;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -59,13 +59,15 @@ i {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin: auto 0;
+  flex-wrap: wrap;
 }
 
 /* recommended teas */
 
 #tea-advisor {
   width: 65vw;
-  height: 60vh;
+  height: 50vh;
   background-color: #E1D0BC;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;

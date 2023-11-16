@@ -18,20 +18,21 @@ function renderManageFavoritesList() {
       const teaImage = document.createElement('img');
       teaItem.appendChild(teaImage);
       teaImage.setAttribute('src', `${teaObject.imgSrc}`);
+      teaImage.setAttribute('alt', `${teaObject.name}`);
       // container for tea description
       const teaDescription = document.createElement('div');
       teaItem.appendChild(teaDescription);
       teaDescription.classList.add('manageFavoritesListItemDescription');
       // name
-      const teaName = document.createElement('dt');
+      const teaName = document.createElement('span');
       teaDescription.appendChild(teaName);
       teaName.textContent = teaObject.name;
       // type
-      const teaType = document.createElement('dd');
+      const teaType = document.createElement('span');
       teaDescription.appendChild(teaType);
       teaType.textContent = `Type: ${teaObject.type}`;
       // link
-      const teaLink = document.createElement('dd');
+      const teaLink = document.createElement('span');
       teaDescription.appendChild(teaLink);
       const teaAnchor = document.createElement('a');
       teaLink.appendChild(teaAnchor);
