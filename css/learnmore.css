@@ -17,6 +17,7 @@ h1 {
   text-align: center;
   padding: 20px 0;
 }
+
 .location-info {
   background-color: #FAF9F8;
   padding: 20px;
@@ -146,9 +147,10 @@ body.dark-mode {
   padding: 10px;
   text-align: center;
 }
+
 #cartIcon {
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #C16632;
   color: white;
   border-radius: 50%;
   cursor: pointer;

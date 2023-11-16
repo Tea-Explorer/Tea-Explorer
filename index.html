@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tea Explorer</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
-  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="css/favorites-tab.css">
   <link rel="stylesheet" href="css/map.css">
   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
@@ -13,42 +13,35 @@
   <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/geodata/data/countries2.js"></script>
   <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e73ad52303.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/e73ad52303.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="one-two-header">
-    <div class="one-two-leftheader">
-      <img src="img/assets/tea-explorer.png" alt="team-logo" width="100" height="100" />
-      <div>
-        <p>Tea Explorers</p>
-        <strong>EXPLORE TEA AROUND THE WORLD</strong>
-      </div>
+  <header>
+    <div id="logoContainer">
+      <img src="images/logo-trans.png" alt="team-logo" width="100" height="100" />
+      <h1>Tea Explorers</h1>
     </div>
-    <nav class="one-two-rightheader">
-      <section class="link-container">
-        <a href="index.html" alt="Map page link">EXPLORE , </a>
-        <a href="events.html" alt="Homepage Link"> EVENTS , </a> 
-        <a href="favorite.html" alt="favorite link">FAVORITE, </a>
-        <a href="teas.html" alt="Homepage Link">LEARN MORE, </a>
-        <a href="filter.html">CATEGORIES</a>
-        <a href="about-us.html" alt="About us link">ABOUT </a>
-      </section>
+    <nav>
+      <a href="index.html" alt="Map page link">EXPLORE</a>
+      <a href="events.html" alt="Homepage Link"> EVENTS</a> 
+      <a href="favorite.html" alt="favorite link">FAVORITES</a>
+      <a href="teas.html" alt="Homepage Link">LEARN MORE</a>
+      <a href="filter.html">CATEGORIES</a>
+      <a href="about-us.html" alt="About us link">ABOUT</a>
     </nav>
   </header>
   <main>
+    <h2>EXPLORE TEA AROUND THE WORLD:</h2>
     <div id="mapContainer">
     </div>
     <div id="innerContainer"></div>
     <menu id="favoritesTab">
-      <h2><a href="favorite.html">Favorites</a></h2>
+      <h2>Favorites</h2>
       <ul id="favoritesList"></ul>
-      <div id="add-manually"><a href="#">Add Your Own</a></div>
+      <div id="manage-favorites"><a href="favorite.html">Manage Favorites</a></div>
     </menu>
   </main>
 </body>
@@ -58,6 +51,7 @@
   </section>
 </footer>
 
+<script src="js/app.js"></script>
 <script src="js/favorites-tab.js"></script>
 <script src="js/map.js"></script>
 </html>

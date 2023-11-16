@@ -6,10 +6,71 @@ main {
   width: 80vw;
 }
 
+i {
+  cursor: pointer;
+  color: #D9A486
+}
+
+/* manage favorites list */
+
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #C9A88D;
-  width: 20vw;
+  width: 30vw;
   display: flex;
   flex-direction: column;
+}
+
+#manageFavorites h2 {
+  background-color: #656D4F;
+  color: #FAF9F8;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.manageFavoritesListItem {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 1.5rem auto;
+}
+
+.manageFavoritesListItem img {
+  width: 50%;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+  background-color: #E1D0BC;
+  border: .1rem solid #1A1A1A;
+}
+
+.manageFavoritesListItemDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  width: 50%;
+}
+
+#manageFavorites i {
+  color: #1A1A1A;
+}
+
+#add-manually {
+  background-color: #9B9B84;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  padding: .5rem;
+}
+
+#add-manually a {
+  color: #FAF9F8;
+  text-decoration: none;
+}
+
+#add-manually a:hover {
+  text-decoration: underline;
+  font-style: normal;
 }
