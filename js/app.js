@@ -1,39 +1,27 @@
-// Check if there's a saved active link in local storage
-const activeLink = localStorage.getItem('activeLink');
-// Get all nav links
-const aLinks = document.querySelectorAll('#topHeader nav a');
-// Get home page
-const home = document.querySelector('nav a[data-page="index"]');
+const indexB = document.querySelector('nav a[data-page="index"]');
+const categoriesB = document.querySelector('nav a[data-page="categories"]');
+const learnB = document.querySelector('nav a[data-page="teas"]');
+const eventsB = document.querySelector('nav a[data-page="events"]');
+const favsB = document.querySelector('nav a[data-page="favorite"]');
+const aboutB = document.querySelector('nav a[data-page="about-us"]');
 
-// If there's an active link, add the 'active' class
-if (activeLink) {
-  const activeElement = document.querySelector(`nav a[data-page="${activeLink}"]`);
-  if (activeElement) {
-    activeElement.classList.add('active');
-  }
-} else {
-  home.classList.add('active');
+const index = document.getElementById('mapContainer');
+const categories = document.getElementById('teaInformation');
+const learn = document.getElementById('purchaselink');
+const events = document.getElementById('eventInfo');
+const favs = document.getElementById('tea-advisor');
+const about = document.getElementById('mission');
+
+if (index) {
+  indexB.classList.add('active');
+} else if (categories) {
+  categoriesB.classList.add('active');
+} else if (learn) {
+  learnB.classList.add('active');
+} else if (events) {
+  eventsB.classList.add('active');
+} else if (favs) {
+  favsB.classList.add('active');
+} else if (about) {
+  aboutB.classList.add('active');
 }
-
-// Add click event listener to update active link
-for (let x of aLinks) {
-  x.addEventListener('click', function () {
-    aLinks.forEach(element => {
-      element.classList.remove('active');
-    });
-    x.classList.add('active');
-
-    // Save the active link to local storage
-    localStorage.setItem('activeLink', x.getAttribute('data-page'));
-  });
-}
-
-const logo = document.querySelector('#logoContainer img');
-
-logo.addEventListener('click', function() {
-  aLinks.forEach(element => {
-    element.classList.remove('active');
-  });
-  home.classList.add('active');
-  localStorage.setItem('activeLink', 'index');
-});
