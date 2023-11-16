@@ -81,15 +81,15 @@ footer {
   max-width: 600px; 
 }
 
-#allTeas {
+#our-favorite-teas {
   text-align: center;
 }
 
-#allTeas h2 {
+#our-favorite-teas h2 {
   margin-bottom: 10px; 
 }
 
-#allTeas ul {
+#our-favorite-teas ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -98,7 +98,7 @@ footer {
   justify-content: center;
 }
 
-#allTeas li {
+#our-favorite-teas li {
   margin: 10px;
   text-align: center;
 }
