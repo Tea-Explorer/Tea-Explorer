@@ -12,7 +12,7 @@ main {
   height: calc(100% - 20vh);
 }
 
-header {
+#topHeader {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
@@ -21,11 +21,11 @@ header {
   height: 15vh;
 }
 
-header>* {
+#topHeader>* {
   letter-spacing: 0.3rem;
 }
 
-header #logoContainer {
+#topHeader #logoContainer {
   grid-area: 1 / 1 / 2 / 2;
   display: flex;
   align-items: center;
@@ -37,14 +37,14 @@ header #logoContainer {
   width: 15vh
 }
 
-header div h1 {
+#topHeader div h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-size: 2vmax;
 }
 
-nav {
+#topHeader nav {
   grid-area: 1 / 2 / 2 / 3;
   display: flex;
   justify-content: space-evenly;
@@ -53,16 +53,20 @@ nav {
   font-weight: 500;
 }
 
-nav a {
+#topHeader nav a {
   text-decoration: none;
   color: black;
+}
+
+#topHeader nav a:hover {
+  transform: translateY(1px);
 }
 
 .active {
   font-weight: 800;
 }
 
-footer {
+#bottomFooter {
   height: 5vh;
   background-color: #e1d0bc;
   margin-top: auto;
@@ -227,11 +231,11 @@ ul li {
   font-weight: bold; 
 }
 
-.one-two-rightheader,{
+.one-two-rightheader {
   display:flex;
   align-items: center;
-  
 }
+
 .one-two-leftheader{
   display:flex;
   align-items: center;
