@@ -7,9 +7,6 @@ const options = {
   useDetailPopup: true,
   isReadOnly: true,
   
-  // popupDelete() {
-  //   return 'FIX'
-  // },  
   month: {
     visibleWeeksCount: 4,
   },
@@ -54,7 +51,7 @@ calendar.createEvents([
     state: '$50 Event Fee',
     location: '456 Earl Street, London, England',
     color: 'BLACK',
-    backgroundColor: '#FBEDDB',
+    backgroundColor: ' #D9A486',
     isAllday:true,
     category: 'allday'
   },
@@ -67,7 +64,7 @@ calendar.createEvents([
     state: 'Free Event',
     location: '101 Mate Avenue, Buenos Aires, Argentina',
     color: 'BLACK',
-    backgroundColor: '#FBEDDB',
+    backgroundColor: '#D9A486',
   },
   {
     id: 'event4',
@@ -94,7 +91,7 @@ calendar.createEvents([
 ]);
 calendar.setTheme({
   common: {
-    backgroundColor: '#FAF9F8',
+    backgroundColor: '#F2EBE1',
     border: '2px solid BLACK',
     gridSelection: {
       backgroundColor: 'none',
