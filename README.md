@@ -1,7 +1,5 @@
 # Tea Explorer by QUICM
 
-![QUICM Logo](image-2.png)
-
 [Qilin Xie](https://github.com/QILINXIE02)  
 [Ugo Obiako](https://github.com/Ugo-Obiako)  
 [Immanuel Shin](https://github.com/ImmanuelShin)  
