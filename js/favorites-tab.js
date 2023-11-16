@@ -30,6 +30,7 @@ Tea.teaObjects = [];
 
 // Tea object methods
 Tea.prototype.favoriteButtonListener = function () { // favorite button click event listener
+  
   const favoriteButton = document.getElementById(`${this.id}`);
   if (favoriteButton) {
     const self = this;

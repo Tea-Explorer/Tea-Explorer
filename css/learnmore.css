@@ -17,6 +17,7 @@ h1 {
   text-align: center;
   padding: 20px 0;
 }
+
 .location-info {
   background-color: #FAF9F8;
   padding: 20px;
@@ -75,7 +76,7 @@ footer {
 }
 
 .location-info {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto; 
   padding: 20px; 
 }
@@ -138,5 +139,22 @@ footer {
 
 body.dark-mode {
   background-color: #333;
-  color: #1c20e2;
+  color: #01010f;
+}
+
+#header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+#cartIcon {
+  padding: 10px;
+  background-color: #C16632;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#teaImages img {
+  margin: 5px;
 }

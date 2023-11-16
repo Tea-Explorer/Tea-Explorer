@@ -12,7 +12,9 @@ mapContainer.setThemes([
 // Creates map.
 let map = mapContainer.container.children.push(am5map.MapChart.new(mapContainer, {
   panX: 'rotateX',
-  projection: am5map.geoMercator()
+  projection: am5map.geoMercator(),
+  minZoomLevel: 2,
+  maxZoomLevel: 8
 }));
 
 // Says world, but really just contains countries within the world
@@ -21,9 +23,12 @@ let world = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
   exclude: ['AQ']
 }));
 
+world.events.on('datavalidated', function() {
+  map.goHome();
+});
+
 // Set options for all polygons in world map.
 // Set tool tip text upon hover to whatever in tooltipText:
-// 
 world.mapPolygons.template.setAll({
   tooltipText: '{name}',
   interactive: true,
@@ -66,7 +71,9 @@ let province = map.series.push(am5map.MapPolygonSeries.new(mapContainer, {
   visible: false
 }));
 
-// 
+// Set template for all provinces.
+// Adds tooltip for name
+// Sets fill color
 province.mapPolygons.template.setAll({
   tooltipText: '{name}',
   interactive: true,
@@ -151,27 +158,38 @@ let locations = map.series.push(am5map.MapPointSeries.new(mapContainer, {
 
 }));
 
+// Adds bullet pins.
+// Adds event listener to each bullet
+// Sends self data to handle function.
 locations.bullets.push(function () {
   let pin = am5.Picture.new(mapContainer, {
-    width: 32,
+    width: 22,
     height: 32,
     centerX: am5.p50,
     centerY: am5.p100,
     src: 'img/assets/map-pin.png',
-    tooltipText: 'hi',
-    tooltip: am5.Tooltip.new(mapContainer, {
-      labelHTML: "<div class='hoverContainer'><h2 class='hoverHeader'>{title}</h2><img src='{src}' alt='{title}'></div>",
-    })
+    tooltipText: 'Tooltip for {title} tea'
+    // tooltip: am5.Tooltip.new(mapContainer, {
+    //   labelHTML: '<div class="hoverContainer"><h2 class="hoverHeader">{title}</h2><img src="{src}" alt="{title}"></div>',
+    //   strokeOpacity: 0
+    // })
   });
+  let tooltip = am5.Tooltip.new(mapContainer, {
+    labelHTML: '<div class="hoverContainer"><h2 class="hoverHeader">{title}</h2><img src="{src}" alt="{title}"></div>',
+    strokeOpacity: 0
+  });
+
+  tooltip.get('background').setAll({
+    strokeOpacity: 0
+  });
+
+  pin.set('tooltip', tooltip);
 
   let bullet = am5.Bullet.new(mapContainer, {
     sprite: pin,
   });
 
-
-
   pin.events.on('click', function (e) {
-    console.log('click');
     handlePopup(e.target.dataItem.dataContext);
   });
   return bullet;
@@ -185,49 +203,55 @@ let cities = [
     title: 'Kyoto',
     latitude: 35.0116, longitude: 135.768326,
     imagePath: 'img/assets/greentea.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Green Tea: Immerse yourself in the serenity of Japanese green tea at Feature Tea in Kyoto, renowned for its diverse health benefits, including a metabolism boost, abundant antioxidants, calming effects, heart health support, body detoxification, and enhanced skin health.',
+    link: 'teas.html#greenTea',
+    id: 'green'
   }, {
     title: 'London',
     latitude: 51.5072, longitude: -0.1276,
     imagePath: 'img/assets/Earl-Grey-tea.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Earl Grey Tea: Embark on a journey of classic elegance with Earl Grey tea at Feature Tea in London. Delight in its refreshing citrus aroma, antioxidant-rich black tea, mood-enhancing bergamot oil, and potential benefits for heart health.',
+    link: 'teas.html#earlTea',
+    id: 'earl'
   }, {
     title: 'Los Angeles',
     latitude: 34.0549, longitude: -118.2426,
     imagePath: 'img/assets/Chamomile.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Chamomile Tea: Unwind in the tranquility of Chamomile Tea at Feature Tea in Los Angeles. Known for natural relaxation, digestive support, anti-inflammatory properties, and immune boosting',
+    link: 'teas.html#chamomileTea',
+    id: 'chamomile'
   }, {
     title: 'Buenos Aires',
     latitude: -34.6037, longitude: -58.3816,
     imagePath: 'img/assets/yerba-mate-tea.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Yerba Mate: Energize your senses with the invigorating Yerba Mate at Feature Tea in Buenos Aires. This traditional South American herbal tea offers a natural stimulant, rich antioxidants, improved mental focus, and digestive health support.',
+    link: 'teas.html#yerbaTea',
+    id: 'yerba'
   }, {
-    title: 'Cape Town', latitude: -33.9249,
-    longitude: 18.4241,
+    title: 'Cape Town',
+    latitude: -33.9249, longitude: 18.4241,
     imagePath: 'img/assets/South-African-Rooibos-tea.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Rooibos: Discover the rich and soothing qualities of South African Rooibos at Feature Tea in Cape Town. This caffeine-free herbal tea boasts antioxidant power, calming properties, benefits for healthy skin, and a mineral boost.',
+    link: 'teas.html#rooibosTea',
+    id: 'rooibos'
   }, {
     title: 'Sydney',
     latitude: -33.8688, longitude: 151.2093,
     imagePath: 'img/assets/Australian-Lemon-Myrtle-Tea.jpg',
-    about: 'ABOUT',
-    link: 'link'
+    about: 'Lemon Myrtle Tea: Savor the invigorating flavor of Australian Lemon Myrtle Tea at Feature Tea in Sydney. This herbal infusion brings zesty immune support, antimicrobial properties, stress relief, and digestive comfort.',
+    link: 'teas.html#lemonTea',
+    id: 'lemon'
   }
 ];
 
 // Loops through and pushes all cities into addCity function
 for (let i = 0; i < cities.length; i++) {
   let city = cities[i];
-  addCity(city.longitude, city.latitude, city.title, city.imagePath, city.about, city.link);
+  addCity(city.longitude, city.latitude, city.title, city.imagePath, city.about, city.link, city.id);
 }
 
 // Adds city data into locations.data
-function addCity(long, lat, title, path, about, link) {
+function addCity(long, lat, title, path, about, link, id) {
   locations.data.push({
     geometry: {
       type: 'Point',
@@ -236,12 +260,16 @@ function addCity(long, lat, title, path, about, link) {
     title: title,
     src: path,
     about: about,
-    link: link
+    link: link,
+    id: id
   });
 }
 
+// Creates pop up div that contains information about tea.
+// Takes target data from pin.
 function handlePopup(target) {
-  console.log(target);
+  const tea = getTea(String(target.id));
+
   let map = document.getElementById('mapContainer');
   let inner = document.getElementById('innerContainer');
   let popup = document.createElement('div');
@@ -258,12 +286,20 @@ function handlePopup(target) {
 
   let about = document.createElement('p');
   about.textContent = target.about;
+
   popup.append(about);
 
   let favoriteDiv = document.createElement('div');
   favoriteDiv.setAttribute('id', 'fav');
-  let heart = document.createElement('img');
-  heart.src = 'img/assets/heart.svg';
+
+  let heart = document.createElement('i');
+  heart.setAttribute('id', `${tea.id}`);
+  if (tea.favorite) {
+    heart.setAttribute('class', 'fa-solid fa-heart fa-2xl');
+  } else {
+    heart.setAttribute('class', 'fa-regular fa-heart fa-2xl');
+  }
+
   let fav = document.createElement('p');
   fav.textContent = 'ADD TO FAVORITES';
   favoriteDiv.append(heart);
@@ -273,12 +309,12 @@ function handlePopup(target) {
   let link = document.createElement('a');
   link.setAttribute('id', 'link');
   link.href = target.link;
-  link.setAttribute('target', '_blank');
+  // link.setAttribute('target', '_blank');
 
   let linkImg = document.createElement('img');
   linkImg.src = 'img/assets/link.svg';
   let linkMsg = document.createElement('p');
-  linkMsg.textContent = 'Purchase Tea';
+  linkMsg.textContent = 'Learn More';
 
   link.append(linkImg);
   link.append(linkMsg);
@@ -298,5 +334,29 @@ function handlePopup(target) {
   map.style.opacity = '0.5';
   map.style['pointer-events'] = 'none';
   inner.style.opacity= '1';
+
+  addListener(tea, heart);
 }
 
+// Finds object from Tea.teaObjects that matched id
+// Returns that object
+function getTea(id) {
+  const teas = Tea.teaObjects;
+  const tea = teas.find((tea) => tea.id === id);
+  console.log(tea);
+  return tea;
+}
+
+// Adds listener to current heart element
+// Checks tea object is already favorite in order to change heart style
+function addListener(tea, heart) {
+  const button = document.getElementById('fav');
+  button.addEventListener('click', function () {
+    if (tea.favorite) {
+      heart.classList.replace('fa-solid', 'fa-regular');
+    } else {
+      heart.classList.replace('fa-regular', 'fa-solid');
+    }
+    checkFavorites(tea);
+  });
+}
