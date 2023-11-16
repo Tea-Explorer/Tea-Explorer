@@ -100,16 +100,24 @@ function updateFavorites() {
       const tabListItem = document.createElement('li');
       favoritesTabList.appendChild(tabListItem);
       tabListItem.textContent = teaObject.name;
-      // update favorite button to solid
-      if (favoriteButton.classList.contains('fa-heart')) {
-        favoriteButton.classList.replace('fa-regular', 'fa-solid');
-      }
+    }
+    if (document.getElementById('our-favorite-teas')){
+      changeHeart(favoriteButton, teaObject);
+    }
+  }
+}
 
-    } else if (teaObject.favorite === false) {
-      // update favorite button to outline
-      if (favoriteButton.classList.contains('fa-heart')) {
-        favoriteButton.classList.replace('fa-solid', 'fa-regular');
-      }
+// Function for changing your heart.
+function changeHeart(button, tea) {
+  // update favorite button to solid
+  if (tea.favorite) {
+    if (button.classList.contains('fa-heart')) {
+      button.classList.replace('fa-regular', 'fa-solid');
+    }
+  } else {
+  // update favorite button to outline
+    if (button.classList.contains('fa-heart')) {
+      button.classList.replace('fa-solid', 'fa-regular');
     }
   }
 }
