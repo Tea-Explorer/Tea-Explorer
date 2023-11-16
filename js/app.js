@@ -1,7 +1,7 @@
 // Check if there's a saved active link in local storage
 const activeLink = localStorage.getItem('activeLink');
-console.log(activeLink);
-const aLinks = document.querySelectorAll('header nav a');
+// Get
+const aLinks = document.querySelectorAll('#topHeader nav a');
 
 // If there's an active link, add the 'active' class
 if (activeLink) {
@@ -21,6 +21,5 @@ for (let x of aLinks) {
 
     // Save the active link to local storage
     localStorage.setItem('activeLink', x.getAttribute('data-page'));
-    console.log(localStorage.getItem('activeLink'));
   });
 }
