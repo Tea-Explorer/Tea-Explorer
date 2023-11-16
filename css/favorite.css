@@ -63,17 +63,56 @@ i {
 
 /* recommended teas */
 
-#recommended-teas {
+#tea-advisor {
   width: 65vw;
   height: 60vh;
+  background-color: #E1D0BC;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+#tea-advisor h2 {
+  height: 5vh;
+  background-color: #656D4F;
+  color: #FAF9F8;
+  font-family: 'Josefin Sans', sans-serif, monospace;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#tea-advisor p {
+  height: 5vh;
+  background-color: #9B9B84;
+  color: #FAF9F8;
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#tea-advisor div {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#tea-advisor i {
+  color: #C16632;
 }
 
 /* manage favorites list */
 
 #manageFavorites {
   font-family: 'Josefin Sans', sans-serif;
-  background-color: #C9A88D;
+  background-color: #E1D0BC;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 20vw;
   display: flex;
@@ -107,7 +146,7 @@ i {
   height: 100px;
   object-fit: contain;
   object-position: center;
-  background-color: #E1D0BC;
+  background-color: #C9A88D;
   border: .1rem solid #1A1A1A;
 }
 
@@ -130,6 +169,7 @@ i {
   font-style: italic;
   text-align: center;
   padding: .5rem;
+  margin-top: auto;
 }
 
 #add-manually a {
