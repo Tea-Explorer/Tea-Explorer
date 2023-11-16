@@ -6,13 +6,13 @@
 // eslint-disable-next-line no-unused-vars
 function filterTea(){
   let teaType = document.getElementById("selectTea").value;
-  let imgWhite = document.getElementById("imgWhiteTea");
+  //let imgWhite = document.getElementById("imgWhiteTea");
   let message = "";
 
 switch (teaType) {
 
  case "White Tea":
- message += "<h2>White Tea</h2><p>White tea is made from the young buds and immature tea leaves that are covered in small white hairs, which were picked shortly before the buds have fully opened. Straight after harvesting, the young, unfurled leaves aren't rolled but are immediately fired to minimise oxidation, giving white tea one of the most light and delicate flavors out of all the tea varieties. <p>White tea has the lowest caffeine content of all the teas because it's the least processed tea with the shortest oxidation time.</p>";
+ message += "<h2>White Tea</h2><p>White tea is made from the young buds and immature tea leaves that are covered in small white hairs, which were picked shortly before the buds have fully opened. Straight after harvesting, the young, unfurled leaves aren't rolled but are immediately fired to minimise oxidation, giving white tea one of the most light and delicate flavors out of all the tea varieties. <p>White tea has the lowest caffeine content of all the teas because it is the least processed tea with the shortest oxidation time.</p>";
  //imgWhite.style.display = "block";
  break;
  
@@ -26,6 +26,10 @@ case "Green Tea":
  
  case "Oolong Tea":
  message += "<h2>Oolong Tea</h2><p>Oolong tea is partially oxidized and the degree of oxidation can range from slightly oxidized to very oxidized (but not fully oxidized). The depth of character of oolong tea depends on the degree of oxidation, so an oolong can end up being closer to a green tea, or a black tea, depending on how it is produced.</p";
+ break;
+
+ case "Black Tea":
+ message += "<h2>Black Tea</h2><p>Black tea is generally stronger than the other tea types - white, yellow, green and oolong tea. During the production of black tea, tea leaves are allowed to oxidize fully before being fired (dried). When brewed, black tea produces a dark drink with a rich, malty flavor. Because black tea is allowed to oxidize for a long time, it typically has the highest caffeine content of all the teas, although still less than the caffeine content of coffee.</p";
  break;
 
  default:
