@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tea Explorer</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
-  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="css/favorites-tab.css">
   <link rel="stylesheet" href="css/favorite.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,22 +17,18 @@
     <script src="https://kit.fontawesome.com/e73ad52303.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="one-two-header">
-    <div class="one-two-leftheader">
-      <img src="img/assets/tea-explorer.png" alt="team-logo" width="100" height="100" />
-      <div>
-        <p>Tea Explorers</p>
-        <strong>EXPLORE TEA AROUND THE WORLD</strong>
-      </div>
+  <header>
+    <div id="logoContainer">
+      <img src="images/logo-trans.png" alt="team-logo" width="100" height="100" />
+      <h1>Tea Explorers</h1>
     </div>
-    <nav class="one-two-rightheader">
-      <section class="link-container">
-        <a href="index.html" alt="Map page link">EXPLORE , </a>
-        <a href="events.html" alt="Homepage Link"> EVENTS , </a>
-        <a href="favorite.html" alt="favorite link">FAVORITE, </a>
-        <a href="teas.html" alt="Homepage Link">LEARN MORE, </a>
-        <a href="about-us.html" alt="About us link">ABOUT </a>
-      </section>
+    <nav>
+      <a href="index.html" alt="Map page link">EXPLORE</a>
+      <a href="events.html" alt="Homepage Link"> EVENTS</a> 
+      <a href="favorite.html" alt="favorite link">FAVORITES</a>
+      <a href="teas.html" alt="Homepage Link">LEARN MORE</a>
+      <a href="filter.html">CATEGORIES</a>
+      <a href="about-us.html" alt="About us link">ABOUT</a>
     </nav>
   </header>
   <main>
@@ -82,7 +78,7 @@
     <div id="manage-favorites"><a href="favorite.html">Manage Favorites</a></div>
   </menu>
   <!-- favorites tab -->
-
+  <script src="js/app.js"></script>
   <script src="js/favorites-tab.js"></script>
   <script src="js/favorite.js"></script>
 </body>
